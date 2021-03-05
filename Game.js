@@ -53,7 +53,27 @@ class Game {
       winner = player;
     }
     console.log('winner', winner);
+    this.winCounter(winner);
+    this.checkForGameDraw(game, winner);
+    this.disableAllButtons(winner);
+    this.restartGame(winner);
 
+    // if (winner !== undefined) {
+    //   this.enableAllButtons();
+    // }
+  }
+
+  checkForGameDraw(game, winner) {
+    if(!winner && (currentBoard.zero + currentBoard.one + currentBoard.two
+      + currentBoard.three + currentBoard.four + currentBoard.five
+      + currentBoard.six + currentBoard.seven + currentBoard.eight > 24)) {
+        console.log('draw');
+        winner = 'draw';
+      }
+      this.restartGame(winner)
+  }
+
+  winCounter(winner) {
     if (winner === 'player1') {
       this.player1.wins ++;
     } else if (winner === 'player2') {
@@ -61,17 +81,29 @@ class Game {
     }
     console.log('w1', this.player1.wins);
     console.log('w2', this.player2.wins);
-
-    this.checkForGameDraw(game, winner);
-    this.disableAllButtons(winner);
   }
 
-  checkForGameDraw(game, winner) {
-    if(!winner && (currentBoard.zero + currentBoard.one + currentBoard.two
-      + currentBoard.three + currentBoard.four + currentBoard.five
-      + currentBoard.six + currentBoard.seven + currentBoard.eight > 24)) {
-        console.log('draw')
+  // restartGame(winner) {
+  //   if (winner) {
+  //     this.enableAllButtons();
+  //   }
+  // }
+
+  restartGame(winner) {
+    setTimeout( function() { //can't breakup b/f of issue w/ this
+      if (winner) {
+        //clear data model
+        currentBoard = {zero: 0, one: 0, two: 0, 
+          three: 0, four: 0, five: 0, 
+          six: 0, seven: 0, eight: 0};
+        //clear dom
+        var nodeList = document.querySelectorAll('button');
+        for (var i = 0; i < nodeList.length; i++) {
+          nodeList[i].innerText = "";     //clear dom
+          nodeList[i].disabled = false;  //enable buttons
+        }
       }
+    }, 2000);
   }
 
   disableAllButtons(winner) {

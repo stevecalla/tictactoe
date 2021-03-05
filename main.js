@@ -28,6 +28,7 @@ function playGame(event) {
 }
 
 function renderTokenToBoard(player, game, token, event) {
+  // render from data model
   event.target.innerText = token;
   event.target.disabled = true;
   
