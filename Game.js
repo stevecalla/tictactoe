@@ -8,10 +8,6 @@ class Game {
     //                     six: 0, seven: 0, eight: 0};
   }
 
-  // startGame() {
-  //   this.currentPlayer = 'player2';
-  // }
-
   playerTurn(event, targetKey, game) {
     var token = null;
     var number; 
@@ -57,10 +53,18 @@ class Game {
       winner = player;
     }
     console.log('winner', winner);
+
+    if (winner === 'player1') {
+      this.player1.wins ++;
+    } else if (winner === 'player2') {
+      this.player2.wins ++
+    }
+    console.log('w1', this.player1.wins);
+    console.log('w2', this.player2.wins);
+
     this.checkForGameDraw(game, winner);
     this.disableAllButtons(winner);
   }
-
 
   checkForGameDraw(game, winner) {
     if(!winner && (currentBoard.zero + currentBoard.one + currentBoard.two
@@ -80,14 +84,3 @@ class Game {
   }
 
 }
-
-// GAME CLASS
-// PROPERTIES
-// 1) Two Player instances                                          DONE
-// 2) A way to keep track of the data for the game board
-// 3) A way to keep track of which player’s turn it currently is
-
-// METHODS
-// 1) A way to check the Game’s board data for win conditions
-// 2) A way to detect when a game is a draw (no one has won)
-// 3) A way to reset the Game’s board to begin a new game
