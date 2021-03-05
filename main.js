@@ -13,6 +13,9 @@ gameBoard.addEventListener('click', playGame);
 
 function startGame() {
   currentGame = new Game('player2');
+  currentGame.player1.token = '✖️'; 
+  currentGame.player2.token = '⭕';
+
   // get player from local storage
   // currentGame.startGame('player from local storage');
 }
@@ -27,9 +30,9 @@ function playGame(event) {
   // currentGame.determineWinner(player, game)
 }
 
-function renderTokenToBoard(player, game, token, event) {
+function renderTokenToBoard(player, game, event) {
   // render from data model
-  event.target.innerText = token;
+  event.target.innerText = currentGame[player].token;
   event.target.disabled = true;
   
 }

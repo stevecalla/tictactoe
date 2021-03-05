@@ -9,25 +9,23 @@ class Game {
   }
 
   playerTurn(event, targetKey, game) {
-    var token = null;
+    // var token = null;
     var number; 
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
       this.currentPlayer = 'player1';
       number = 1;
-      token = '✖️'; 
     } else if (event.target.innerText === '') {
       this.currentPlayer = 'player2';
       number = 5;
-      token = '⭕';
     }
-    this.updateGameTracker(this.currentPlayer, number, token, targetKey, game, event);
+    this.updateGameTracker(this.currentPlayer, number, targetKey, game, event);
   }
 
-  updateGameTracker(player, number, token, targetKey, game, event) {
+  updateGameTracker(player, number, targetKey, game, event) {
     console.log(event.target)
     currentBoard[targetKey] = number;
     console.log('b', currentBoard)
-    renderTokenToBoard(player, currentBoard, token, event);
+    renderTokenToBoard(player, currentBoard, event);
     this.determineWinner(player, game)
   }
 
@@ -57,10 +55,6 @@ class Game {
     this.checkForGameDraw(game, winner);
     this.disableAllButtons(winner);
     this.restartGame(winner);
-
-    // if (winner !== undefined) {
-    //   this.enableAllButtons();
-    // }
   }
 
   checkForGameDraw(game, winner) {
@@ -83,11 +77,6 @@ class Game {
     console.log('w2', this.player2.wins);
   }
 
-  // restartGame(winner) {
-  //   if (winner) {
-  //     this.enableAllButtons();
-  //   }
-  // }
 
   restartGame(winner) {
     setTimeout( function() { //can't breakup b/f of issue w/ this
