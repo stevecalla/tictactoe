@@ -1,63 +1,68 @@
 class Game {
   constructor() {
-    this.player1 = 1;
-    this.player2 = 5;
+    this.player1 = 1; //new Player(id);
+    this.player2 = 5; //new Player(id);
+    this.currentBoard = {zero: 0, one: 0, two: 0, 
+                        three: 0, four: 0, five: 0, 
+                        six: 0, seven: 0, eight: 0};
     // this.TBD;
   }
 
-playerTurn(event) {
-  var token = null;
-  if (player === 'player2' && event.target.innerText === '') {
-    player = 'player1';
-    number = 1;
-    token = '✖️'; 
-  } else if (event.target.innerText === '') {
-    player = 'player2';
-    number = 5;
-    token = '⭕';
+  playerTurn(event, targetKey, game) {
+    var token = null;
+    var number; 
+    if (player === 'player2' && event.target.innerText === '') {
+      player = 'player1';
+      number = 1;
+      token = '✖️'; 
+    } else if (event.target.innerText === '') {
+      player = 'player2';
+      number = 5;
+      token = '⭕';
+    }
+    this.updateGameTracker(player, number, token, targetKey, game, event);
   }
-  updateGameTracker(player, number, token);
-}
 
-function updateGameTracker(player, number, token) {
-  var targetKey = event.target.id;
-  currentGame[targetKey] = number;
-  renderTokenToBoard(player, currentGame, token);
-}
+  updateGameTracker(player, number, token, targetKey, game, event) {
+    console.log(event.target)
+    // var targetKey = event.target.id;
+    this.currentBoard[targetKey] = number;
+    console.log('b', this.currentBoard)
+    renderTokenToBoard(player, game, token, event);
+  }
 
   determineWinner(player, game) {
-    var nodeList = document.querySelectorAll('button');
+    // var nodeList = document.querySelectorAll('button');
     var winner;
     var winningScore = 3;
-
     if (player === 'player2') {
       var winningScore = 15;
     } 
-    checkForPlayerWin(player, game, winner, winningScore);
+    this.checkForPlayerWin(player, game, winner, winningScore);
   }
 
   checkForPlayerWin(player, game, winner, winningScore) {
-    // console.log(game);
-    if (game.zero + game.one + game.two === winningScore
-        || game.three + game.four + game.five === winningScore
-        || game.six + game.seven + game.eight === winningScore
-        || game.zero + game.three + game.six === winningScore
-        || game.one + game.four + game.seven === winningScore
-        || game.two + game.five + game.eight === winningScore
-        || game.zero + game.four + game.eight === winningScore
-        || game.two + game.four + game.six === winningScore) {
+    console.log('d', this.currentBoard)
+    if (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two === winningScore
+        || this.currentBoard.three + this.currentBoard.four + this.currentBoard.five === winningScore
+        || this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight === winningScore
+        || this.currentBoard.zero + this.currentBoard.three + this.currentBoard.six === winningScore
+        || this.currentBoard.one + this.currentBoard.four + this.currentBoard.seven === winningScore
+        || this.currentBoard.two + this.currentBoard.five + this.currentBoard.eight === winningScore
+        || this.currentBoard.zero + this.currentBoard.four + this.currentBoard.eight === winningScore
+        || this.currentBoard.two + this.currentBoard.four + this.currentBoard.six === winningScore) {
       winner = player;
     }
     console.log('winner', winner);
-    checkForGameDraw(game, winner);
-    disableAllButtons(winner);
+    this.checkForGameDraw(this.currentBoard, winner);
+    this.disableAllButtons(winner);
   }
 
 
   checkForGameDraw(game, winner) {
-    if(!winner && (game.zero + game.one + game.two 
-      + game.three + game.four + game.five
-      + game.six + game.seven + game.eight > 24)) {
+    if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two 
+      + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
+      + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
         console.log('draw')
       }
   }
