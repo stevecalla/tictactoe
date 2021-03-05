@@ -1,8 +1,8 @@
 class Player {
-  constructor() {
-    this.id = player-id;
-    this.token = {1: 'TBD', 5: 'TBD' };
-    this.wins = [];
+  constructor(playerId) {
+    this.id = playerId;
+    this.token = null;
+    this.wins = null;
   }
 
   saveToLocalStorage() {

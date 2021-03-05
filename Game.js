@@ -1,33 +1,31 @@
 class Game {
-  constructor() {
-    this.player1 = 1; //new Player(id);
-    this.player2 = 5; //new Player(id);
+  constructor(player) {
+    this.player1 = new Player(1);
+    this.player2 = new Player(5);
+    this.currentPlayer = player || 'player2';
     // this.currentBoard = {zero: 0, one: 0, two: 0, 
     //                     three: 0, four: 0, five: 0, 
     //                     six: 0, seven: 0, eight: 0};
-    // this.TBD;
   }
 
   playerTurn(event, targetKey, game) {
-    var token = null;
+    // var token = null;
     var number; 
-    if (player === 'player2' && event.target.innerText === '') {
-      player = 'player1';
+    if (this.currentPlayer === 'player2' && event.target.innerText === '') {
+      this.currentPlayer = 'player1';
       number = 1;
-      token = '✖️'; 
     } else if (event.target.innerText === '') {
-      player = 'player2';
+      this.currentPlayer = 'player2';
       number = 5;
-      token = '⭕';
     }
-    this.updateGameTracker(player, number, token, targetKey, game, event);
+    this.updateGameTracker(this.currentPlayer, number, targetKey, game, event);
   }
 
-  updateGameTracker(player, number, token, targetKey, game, event) {
+  updateGameTracker(player, number, targetKey, game, event) {
     console.log(event.target)
     currentBoard[targetKey] = number;
     console.log('b', currentBoard)
-    renderTokenToBoard(player, currentBoard, token, event);
+    renderTokenToBoard(player, currentBoard, event);
     this.determineWinner(player, game)
   }
 
@@ -53,17 +51,48 @@ class Game {
       winner = player;
     }
     console.log('winner', winner);
+    this.winCounter(winner);
     this.checkForGameDraw(game, winner);
     this.disableAllButtons(winner);
+    this.restartGame(winner);
   }
-
 
   checkForGameDraw(game, winner) {
     if(!winner && (currentBoard.zero + currentBoard.one + currentBoard.two
       + currentBoard.three + currentBoard.four + currentBoard.five
       + currentBoard.six + currentBoard.seven + currentBoard.eight > 24)) {
-        console.log('draw')
+        console.log('draw');
+        winner = 'draw';
       }
+      this.restartGame(winner)
+  }
+
+  winCounter(winner) {
+    if (winner === 'player1') {
+      this.player1.wins ++;
+    } else if (winner === 'player2') {
+      this.player2.wins ++
+    }
+    console.log('w1', this.player1.wins);
+    console.log('w2', this.player2.wins);
+  }
+
+
+  restartGame(winner) {
+    setTimeout( function() { //can't breakup b/f of issue w/ this
+      if (winner) {
+        //clear data model
+        currentBoard = {zero: 0, one: 0, two: 0, 
+          three: 0, four: 0, five: 0, 
+          six: 0, seven: 0, eight: 0};
+        //clear dom
+        var nodeList = document.querySelectorAll('button');
+        for (var i = 0; i < nodeList.length; i++) {
+          nodeList[i].innerText = "";     //clear dom
+          nodeList[i].disabled = false;  //enable buttons
+        }
+      }
+    }, 2000);
   }
 
   disableAllButtons(winner) {
@@ -76,14 +105,3 @@ class Game {
   }
 
 }
-
-// GAME CLASS
-// PROPERTIES
-// 1) Two Player instances                                          DONE
-// 2) A way to keep track of the data for the game board
-// 3) A way to keep track of which player’s turn it currently is
-
-// METHODS
-// 1) A way to check the Game’s board data for win conditions
-// 2) A way to detect when a game is a draw (no one has won)
-// 3) A way to reset the Game’s board to begin a new game
