@@ -1,0 +1,38 @@
+/* * {
+  border: 1px solid red;
+} */
+
+body {
+  margin: 0;
+}
+
+main {
+/*   border: .1rem solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 15rem;
+  width: 30rem;
+  margin: 0;
+}
+
+.game-tile {
+  border: .1rem solid red;
+/*   display: inline-block; */
+  height: 5rem;
+  width: 10rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  /* border-sizing: border-box; */
+}
+
+button:disabled {
+  background-color: #EFEFEF;
+  cursor: not-allowed;
+  color: #c0c0c0;
+  /* background-color: #c0c0c0; */
+  background-color: #EFEFEF;
+  /* pointer-events: none; */
+}
