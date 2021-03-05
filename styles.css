@@ -17,15 +17,15 @@ main {
   margin: 0;
 }
 
-button {
+.game-tile {
   border: .1rem solid red;
 /*   display: inline-block; */
-  height: 4.7rem;
-  width: 9.7rem;
+  height: 5rem;
+  width: 10rem;
   margin: 0;
   padding: 0;
   text-align: center;
-  border-sizing: border-box;
+  /* border-sizing: border-box; */
 }
 
 button:disabled {
