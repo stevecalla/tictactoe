@@ -1,6 +1,6 @@
 class Player {
-  constructor() {
-    this.id = player-id;
+  constructor(playerId) {
+    this.id = playerId;
     this.token = {1: 'TBD', 5: 'TBD' };
     this.wins = [];
   }

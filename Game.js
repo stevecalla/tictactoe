@@ -1,26 +1,30 @@
 class Game {
-  constructor() {
-    this.player1 = 1; //new Player(id);
-    this.player2 = 5; //new Player(id);
+  constructor(player) {
+    this.player1 = new Player(1);
+    this.player2 = new Player(5);
+    this.currentPlayer = player || 'player2';
     // this.currentBoard = {zero: 0, one: 0, two: 0, 
     //                     three: 0, four: 0, five: 0, 
     //                     six: 0, seven: 0, eight: 0};
-    // this.TBD;
   }
+
+  // startGame() {
+  //   this.currentPlayer = 'player2';
+  // }
 
   playerTurn(event, targetKey, game) {
     var token = null;
     var number; 
-    if (player === 'player2' && event.target.innerText === '') {
-      player = 'player1';
+    if (this.currentPlayer === 'player2' && event.target.innerText === '') {
+      this.currentPlayer = 'player1';
       number = 1;
       token = '✖️'; 
     } else if (event.target.innerText === '') {
-      player = 'player2';
+      this.currentPlayer = 'player2';
       number = 5;
       token = '⭕';
     }
-    this.updateGameTracker(player, number, token, targetKey, game, event);
+    this.updateGameTracker(this.currentPlayer, number, token, targetKey, game, event);
   }
 
   updateGameTracker(player, number, token, targetKey, game, event) {
