@@ -31,10 +31,11 @@ function renderTokenToBoard(player, game, event) {
 }
 
 function renderNextTurnMessage(player) {
+  console.log('mainjs', player)
   nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
 }
 
-function renderWinMessage(wins, winner) {
+function renderWinScore(wins, winner) {
   if (wins !== 1 && winner === 'player1') {
     playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} wins`;
   } else if (winner === 'player1') {
