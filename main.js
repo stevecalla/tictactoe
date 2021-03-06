@@ -3,9 +3,9 @@ var gameBoard = document.querySelector('#gameBoard');
 
 // global variables below
 var currentGame;
-var currentBoard = {zero: 0, one: 0, two: 0, 
-                  three: 0, four: 0, five: 0, 
-                  six: 0, seven: 0, eight: 0};
+// var currentBoard = {zero: 0, one: 0, two: 0, 
+//                   three: 0, four: 0, five: 0, 
+//                   six: 0, seven: 0, eight: 0};
 
 // event listeners below
 window.addEventListener('load', startGame);
@@ -14,6 +14,7 @@ gameBoard.addEventListener('click', playGame);
 function startGame() {
   // var currentGame;
   currentGame = new Game('player2');
+  currentGame.createBoard();
   currentGame.player1.token = '✖️'; 
   currentGame.player2.token = '⭕';
 
