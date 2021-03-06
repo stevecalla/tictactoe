@@ -18,6 +18,8 @@ function startGame() {
   currentGame.createBoard();
   currentGame.player1.token = '✖️'; 
   currentGame.player2.token = '⭕';
+  currentGame.player1.getWinsFromLocalStorage1();
+  currentGame.player2.getWinsFromLocalStorage2();
 }
 
 function playGame(event) {
@@ -31,19 +33,20 @@ function renderTokenToBoard(player, game, event) {
 }
 
 function renderNextTurnMessage(player) {
+  console.log('mainjs', player)
   nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
 }
 
-function renderWinMessage(wins, winner) {
+function renderWinScore(wins, winner) {
   if (wins !== 1 && winner === 'player1') {
-    playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} wins`;
+    playerOneWins.innerText = `${this.currentGame.player1.wins} wins`;
   } else if (winner === 'player1') {
-    playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} win`;
+    playerOneWins.innerText = `${this.currentGame.player1.wins} win`;
   }
 
   if (wins !== 1 && winner === 'player2') {
-    playerTwoWins.innerText = `Player O: ${this.currentGame.player2.wins} wins`;
+    playerTwoWins.innerText = `${this.currentGame.player2.wins} wins`;
   } else if (winner === 'player2') {
-    playerTwoWins.innerText = `Player O: ${this.currentGame.player2.wins} win`;
+    playerTwoWins.innerText = `${this.currentGame.player2.wins} win`;
   }
 }

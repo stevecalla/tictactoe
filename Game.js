@@ -35,10 +35,10 @@ class Game {
     if (player === 'player2') {
       var winningScore = 15;
     } 
-    this.checkForPlayerWin2(player, game, winner, winningScore);
+    this.checkForPlayerWin(player, game, winner, winningScore);
   }
 
-  checkForPlayerWin2(player, game, winner, winningScore) {
+  checkForPlayerWin(player, game, winner, winningScore) {
     if (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two === winningScore
         || this.currentBoard.three + this.currentBoard.four + this.currentBoard.five === winningScore
         || this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight === winningScore
@@ -55,7 +55,7 @@ class Game {
     this.winHistory(winner, this.currentBoard);
     this.disableAllButtons(winner);
     this.resetWinnerAndCurrentBoard();
-    this.restartGame(winner);
+    this.restartGame(winner, this.currentPlayer);
     // console.log(currentGame.winner);
   }
 
@@ -91,12 +91,14 @@ class Game {
   winCounter() {
     if (this.winner === 'player1') {
       this.player1.wins ++;
-      renderWinMessage(this.player1.wins, this.winner);
-      // playerOneWins.innerText = `Player X: ${this.player1.wins} wins`;
+      renderWinScore(this.player1.wins, this.winner);
+      nextTurnMessage.innerText = `${this.player1.token} won!`;//move to mainjs
+      this.player1.saveWinsToLocalStorage();
     } else if (this.winner === 'player2') {
       this.player2.wins ++;
-      renderWinMessage(this.player2.wins, this.winner);
-      // playerTwoWins.innerText = `Player O: ${this.player2.wins} wins`;
+      renderWinScore(this.player2.wins, this.winner);
+      nextTurnMessage.innerText = `${this.player2.token} won!`;//move to mainjs
+      this.player2.saveWinsToLocalStorage();
     }
     console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }
@@ -107,14 +109,21 @@ class Game {
       this.createBoard();
     }
   }
-
+  
   restartGame(winner) {
+    if (this.currentPlayer === 'player1') {
+      var nextPlayer = 'player2';
+    } else {
+      nextPlayer = 'player1';
+    }
+
     setTimeout( function() { //can't breakup b/f of issue w/ this
-      if (winner) {
-        var nodeList = document.querySelectorAll('button');
-        for (var i = 0; i < nodeList.length; i++) {
-          nodeList[i].innerText = "";     //clear dom
-          nodeList[i].disabled = false;  //enable buttons
+    if (winner) {
+      renderNextTurnMessage(nextPlayer);
+      var nodeList = document.querySelectorAll('button');
+      for (var i = 0; i < nodeList.length; i++) {
+        nodeList[i].innerText = "";     //clear dom
+        nodeList[i].disabled = false;  //enable buttons
         }
       }
     }, 2000);

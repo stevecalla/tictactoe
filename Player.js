@@ -6,12 +6,26 @@ class Player {
     this.historicalWins = [];
   }
 
-  saveToLocalStorage() {
-    //
+  saveWinsToLocalStorage() {
+    localStorage.setItem(this.id, this.wins)
   }
 
-  retrieveFromLocalStorage() {
-    //
+  getWinsFromLocalStorage1() {
+    var getWinsFromLocalStorage = localStorage.getItem('1');
+    if(getWinsFromLocalStorage === null) {
+      getWinsFromLocalStorage = 0;
+    }
+    currentGame.player1.wins = getWinsFromLocalStorage;
+    renderWinScore(currentGame.player1.wins, 'player1')
+  }
+
+  getWinsFromLocalStorage2() {
+    var getWinsFromLocalStorage = localStorage.getItem('5');
+    if(getWinsFromLocalStorage === null) {
+      getWinsFromLocalStorage = 0;
+    }
+    currentGame.player2.wins = getWinsFromLocalStorage;
+    renderWinScore(currentGame.player2.wins, 'player2')
   }
 
 }
