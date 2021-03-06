@@ -39,14 +39,14 @@ function renderNextTurnMessage(player) {
 
 function renderWinScore(wins, winner) {
   if (wins !== 1 && winner === 'player1') {
-    playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} wins`;
+    playerOneWins.innerText = `${this.currentGame.player1.wins} wins`;
   } else if (winner === 'player1') {
-    playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} win`;
+    playerOneWins.innerText = `${this.currentGame.player1.wins} win`;
   }
 
   if (wins !== 1 && winner === 'player2') {
-    playerTwoWins.innerText = `Player O: ${this.currentGame.player2.wins} wins`;
+    playerTwoWins.innerText = `${this.currentGame.player2.wins} wins`;
   } else if (winner === 'player2') {
-    playerTwoWins.innerText = `Player O: ${this.currentGame.player2.wins} win`;
+    playerTwoWins.innerText = `${this.currentGame.player2.wins} win`;
   }
 }
