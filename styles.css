@@ -1,38 +1,125 @@
 /* * {
   border: 1px solid red;
 } */
-
+/*--------------------------BODY---------------------*/
 body {
   margin: 0;
 }
 
+/*--------------------------MAIN---------------------*/
 main {
-/*   border: .1rem solid red; */
+  display: flex;
+}
+
+/*--------------------------LEFT ASIDE---------------------*/
+.left-aside {
+  height: 100vh;
+  width: 25vw;
+  text-align: center;
+  background-color: yellow;
+}
+
+/*--------------------------GAME BOARD SECTION---------------------*/
+.middle-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 50vw;
+}
+
+.game-board {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 15rem;
-  width: 30rem;
+  height: 75vh;
+  width: 45vw;
   margin: 0;
+  color: none;
+  background-color: white;
 }
 
 .game-tile {
   border: .1rem solid red;
-/*   display: inline-block; */
-  height: 5rem;
-  width: 10rem;
+  border: none;
+  height: 25vh;
+  width: 15vw;
   margin: 0;
   padding: 0;
   text-align: center;
-  /* border-sizing: border-box; */
+  color: white;
+  background-color: none;
+}
+
+.top {
+  border-bottom: .1rem solid red;
+}
+
+.middle {
+  border-left: .1rem solid red;
+  border-right: .1rem solid red;
+}
+
+.bottom {
+  border-top: .1rem solid red;
 }
 
 button:disabled {
   background-color: #EFEFEF;
   cursor: not-allowed;
   color: #c0c0c0;
-  /* background-color: #c0c0c0; */
   background-color: #EFEFEF;
-  /* pointer-events: none; */
+}
+
+/*--------------------------RIGHT ASIDE---------------------*/
+.right-aside {
+  height: 100vh;
+  width: 25vw;
+  text-align: center;
+  background-color: yellow;
+}
+
+/* ------------------MEDIA QUERIES MIN WIDTH 900px LARGE SCREEN-------------------- */
+@media screen and (min-width: 900px) {
+}
+
+/* ------------------MEDIA QUERIES MAX WIDTH 1400px LARGE SCREENS-------------------- */
+@media only screen and (max-width: 1400px) {
+}
+
+/* ------------------MEDIA QUERIES MAX WIDTH 700px SMALL SCREENS-------------------- */
+@media only screen and (max-width: 750px) {
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left-aside {
+    height: 25vh;
+    width: 100vw;
+  }
+
+  .middle-area {
+    height: 50vh;
+    width: 100vw;
+  }
+
+  .game-board {
+    height: 39vh;
+    width: 75vw;
+  }
+  
+  .game-tile {
+    height: 13vh;
+    width: 25vw;
+  }
+
+  .right-aside {
+    height: 25vh;
+    width: 100vw;
+  }
+
 }

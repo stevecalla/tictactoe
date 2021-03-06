@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <title>Tic Tac Toe</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./styles.css">
   </head>
   <body>
-  <main id="gameBoard">
-    <button class='game-tile' id='zero'></button>
-    <button class='game-tile' id='one'></button>
-    <button class='game-tile' id='two'></button>
-    <button class='game-tile' id='three'></button>
-    <button class='game-tile' id='four'></button>
-    <button class='game-tile' id='five' value=0></button>
-    <button class='game-tile' id='six'></button>
-    <button class='game-tile' id='seven'></button>
-    <button class='game-tile' id='eight'></button>
-  </main>
-  <section>
-    <p id="turnMessage">It's X/O's turn</p>
-    <p>✖️</p>
-    <p id="playerOneWins">Player X: 0 wins</p>
-    <p>⭕</p>
-    <p id="playerTwoWins">Player O: 0 wins</p>
-  </section>
+    <main>
+      <section class="left-aside">
+        <p>✖️</p>
+        <p id="playerOneWins">Player X: 0 wins</p>
+      </section>
+      <section class="middle-area">
+        <p id="turnMessage">It's X/O's turn</p>
+        <div class="game-board" id="gameBoard">
+          <button class='game-tile top' id='zero'></button>
+          <button class='game-tile top middle' id='one'></button>
+          <button class='game-tile top' id='two'></button>
+          <button class='game-tile' id='three'></button>
+          <button class='game-tile middle' id='four'></button>
+          <button class='game-tile' id='five' value=0></button>
+          <button class='game-tile bottom' id='six'></button>
+          <button class='game-tile bottom middle' id='seven'></button>
+          <button class='game-tile bottom' id='eight'></button>
+        </div>
+      </section>
+      <section class="right-aside">
+        <p>⭕</p>
+        <p id="playerTwoWins">Player O: 0 wins</p>
+      </section>
+    </main>
     <script src="Player.js"></script>
     <script src="Game.js"></script>
     <script src="main.js"></script>

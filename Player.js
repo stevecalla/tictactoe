@@ -12,7 +12,6 @@ class Player {
 
   getWinsFromLocalStorage1() {
     var getWinsFromLocalStorage = localStorage.getItem('1');
-    console.log('get', getWinsFromLocalStorage)
     if(getWinsFromLocalStorage === null) {
       getWinsFromLocalStorage = 0;
     }
