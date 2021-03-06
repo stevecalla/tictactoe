@@ -24,7 +24,7 @@ main {
 .page-text {
   margin: 0;
   margin-top: 10vh;
-  font-size: 50px;
+  font-size: 70px;
   color: #6B88F9;
   /* text-align: center; */
 }
@@ -33,7 +33,7 @@ main {
 .grid-text {
   margin: 0;
   margin-bottom: 2vh;
-  font-size: 50px;
+  font-size: 70px;
   color: #6B88F9;
   /* text-align: center; */
 }
@@ -70,6 +70,7 @@ main {
   font-size: 100px;
   text-align: center;
   background: none;
+  outline: none;
 }
 
 .top {
