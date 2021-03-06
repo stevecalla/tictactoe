@@ -12,6 +12,7 @@ window.addEventListener('load', startGame);
 gameBoard.addEventListener('click', playGame);
 
 function startGame() {
+  // var currentGame;
   currentGame = new Game('player2');
   currentGame.player1.token = '✖️'; 
   currentGame.player2.token = '⭕';
