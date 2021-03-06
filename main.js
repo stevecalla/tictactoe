@@ -10,6 +10,7 @@ gameBoard.addEventListener('click', playGame);
 
 //functions below
 function startGame() {
+  // var currentGame;
   currentGame = new Game('player2');
   currentGame.createBoard();
   currentGame.player1.token = '✖️'; 
