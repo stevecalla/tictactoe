@@ -93,10 +93,12 @@ class Game {
       this.player1.wins ++;
       renderWinScore(this.player1.wins, this.winner);
       nextTurnMessage.innerText = `${this.player1.token} won`;
+      this.player1.saveWinsToLocalStorage();
     } else if (this.winner === 'player2') {
       this.player2.wins ++;
       renderWinScore(this.player2.wins, this.winner);
       nextTurnMessage.innerText = `${this.player2.token} won`;
+      this.player2.saveWinsToLocalStorage();
     }
     console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }

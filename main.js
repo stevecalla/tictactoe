@@ -18,6 +18,8 @@ function startGame() {
   currentGame.createBoard();
   currentGame.player1.token = '✖️'; 
   currentGame.player2.token = '⭕';
+  currentGame.player1.getWinsFromLocalStorage1();
+  currentGame.player2.getWinsFromLocalStorage2();
 }
 
 function playGame(event) {
