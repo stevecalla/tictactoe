@@ -9,21 +9,17 @@ class Game {
   }
 
   playerTurn(event, targetKey, game) {
-    // var token = null;
-    var number; 
+    // var number; 
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
       this.currentPlayer = 'player1';
-      number = 1;
     } else if (event.target.innerText === '') {
       this.currentPlayer = 'player2';
-      number = 5;
     }
-    this.updateGameTracker(this.currentPlayer, number, targetKey, game, event);
+    this.updateGameTracker(this.currentPlayer, targetKey, game, event);
   }
 
-  updateGameTracker(player, number, targetKey, game, event) {
-    console.log(event.target)
-    currentBoard[targetKey] = number;
+  updateGameTracker(player, targetKey, game, event) {
+    currentBoard[targetKey] = this[player].id;
     console.log('b', currentBoard)
     renderTokenToBoard(player, currentBoard, event);
     this.determineWinner(player, game)
@@ -54,7 +50,8 @@ class Game {
     this.winCounter(winner);
     this.checkForGameDraw(game, winner);
     this.disableAllButtons(winner);
-    this.restartGame(winner);
+    // this.restartGame(winner);
+    this.winHistory(winner, currentBoard);
   }
 
   checkForGameDraw(game, winner) {
@@ -75,6 +72,16 @@ class Game {
     }
     console.log('w1', this.player1.wins);
     console.log('w2', this.player2.wins);
+  }
+
+  winHistory(winner, currentBoard) {
+    if (winner === 'player1') {
+      this.player1.historicalWins.push(currentBoard);
+    } else if (winner === 'player2') {
+      this.player2.historicalWins.push(currentBoard);
+    }
+    console.log('w1', this.player1.historicalWins);
+    console.log('w2', this.player2.historicalWins);
   }
 
 
