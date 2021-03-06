@@ -3,6 +3,7 @@ class Player {
     this.id = playerId;
     this.token = null;
     this.wins = null;
+    this.historicalWins = [];
   }
 
   saveToLocalStorage() {
