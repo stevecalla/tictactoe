@@ -37,7 +37,6 @@ class Game {
   }
 
   checkForPlayerWin2(player, game, winner, winningScore) {
-    // console.log('d', this.currentBoard)
     if (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two === winningScore
         || this.currentBoard.three + this.currentBoard.four + this.currentBoard.five === winningScore
         || this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight === winningScore
@@ -47,17 +46,23 @@ class Game {
         || this.currentBoard.zero + this.currentBoard.four + this.currentBoard.eight === winningScore
         || this.currentBoard.two + this.currentBoard.four + this.currentBoard.six === winningScore) {
       this.winner = player;
+      winner = this.winner;
     }
-    // console.log('winner', this.winner);
-    winner = this.winner;
     this.winCounter(this.winner);
     this.checkForGameDraw(game, this.winner);
-    this.winHistory(this.winner, this.currentBoard);
+    this.winHistory(winner, this.currentBoard);
     this.disableAllButtons(winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(winner);
-    console.log('test', winner)
-    // console.log('e', this.currentBoard)
+    // console.log(currentGame.winner);
+  }
+
+  winHistory(winner, board) {
+    if (winner === 'player1') {
+      this.player1.historicalWins.push(board);
+    } else if (winner === 'player2') {
+      this.player2.historicalWins.push(board);
+    }
   }
 
   disableAllButtons(winner) {
@@ -70,54 +75,36 @@ class Game {
   }
 
   checkForGameDraw(game, winner) {
-    if(!this.winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
+    if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
         console.log('draw');
         this.winner = 'draw';
         winner = this.winner //can't use this in the restart timeout function
       }
-      this.resetWinnerAndCurrentBoard();
+      // this.resetWinnerAndCurrentBoard();
       this.restartGame(winner);
   }
 
-  winCounter(winner) {
+  winCounter() {
     if (this.winner === 'player1') {
       this.player1.wins ++;
     } else if (this.winner === 'player2') {
       this.player2.wins ++
     }
-    console.log('winner', winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
-  }
-
-  winHistory(winner, currentBoard) {
-    if (this.winner === 'player1') {
-      this.player1.historicalWins.push(this.currentBoard);
-    } else if (this.winner === 'player2') {
-      this.player2.historicalWins.push(this.currentBoard);
-    }
-    // console.log('w3', this.player1.historicalWins);
-    // console.log('w4', this.player2.historicalWins);
+    console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }
 
   resetWinnerAndCurrentBoard() {
     if (this.winner) {
-      // //reset winner
       this.winner = undefined;
-      //clear data model
       this.createBoard();
-    // gameBoard.removeEventListener('click', playGame);
-    // var nodeList = document.querySelectorAll('button');
-    // for (var i = 0; i < nodeList.length; i++) {
-    //   nodeList[i].disabled = false;  //enable buttons
-    // }
     }
   }
 
   restartGame(winner) {
     setTimeout( function() { //can't breakup b/f of issue w/ this
       if (winner) {
-        //clear dom
         var nodeList = document.querySelectorAll('button');
         for (var i = 0; i < nodeList.length; i++) {
           nodeList[i].innerText = "";     //clear dom
