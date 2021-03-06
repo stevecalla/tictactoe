@@ -3,25 +3,29 @@ class Game {
     this.player1 = new Player(1);
     this.player2 = new Player(5);
     this.currentPlayer = player || 'player2';
-    // this.currentBoard = {zero: 0, one: 0, two: 0, 
-    //                     three: 0, four: 0, five: 0, 
-    //                     six: 0, seven: 0, eight: 0};
+    this.winner = undefined;
+  }
+
+  createBoard() {
+    this.currentBoard = {zero: 0, one: 0, two: 0, 
+                        three: 0, four: 0, five: 0, 
+                        six: 0, seven: 0, eight: 0};
   }
 
   playerTurn(event, targetKey, game) {
-    // var number; 
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
+      renderNextTurnMessage(this.currentPlayer);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
+      renderNextTurnMessage(this.currentPlayer);
       this.currentPlayer = 'player2';
     }
     this.updateGameTracker(this.currentPlayer, targetKey, game, event);
   }
 
   updateGameTracker(player, targetKey, game, event) {
-    currentBoard[targetKey] = this[player].id;
-    console.log('b', currentBoard)
-    renderTokenToBoard(player, currentBoard, event);
+    this.currentBoard[targetKey] = this[player].id;
+    renderTokenToBoard(player, this.currentBoard, event);
     this.determineWinner(player, game)
   }
 
@@ -31,68 +35,82 @@ class Game {
     if (player === 'player2') {
       var winningScore = 15;
     } 
-    this.checkForPlayerWin(player, game, winner, winningScore);
+    this.checkForPlayerWin2(player, game, winner, winningScore);
   }
 
-  checkForPlayerWin(player, game, winner, winningScore) {
-    console.log('d', currentBoard)
-    if (currentBoard.zero + currentBoard.one + currentBoard.two === winningScore
-        || currentBoard.three + currentBoard.four + currentBoard.five === winningScore
-        || currentBoard.six + currentBoard.seven + currentBoard.eight === winningScore
-        || currentBoard.zero + currentBoard.three + currentBoard.six === winningScore
-        || currentBoard.one + currentBoard.four + currentBoard.seven === winningScore
-        || currentBoard.two + currentBoard.five + currentBoard.eight === winningScore
-        || currentBoard.zero + currentBoard.four + currentBoard.eight === winningScore
-        || currentBoard.two + currentBoard.four + currentBoard.six === winningScore) {
-      winner = player;
+  checkForPlayerWin2(player, game, winner, winningScore) {
+    if (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two === winningScore
+        || this.currentBoard.three + this.currentBoard.four + this.currentBoard.five === winningScore
+        || this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight === winningScore
+        || this.currentBoard.zero + this.currentBoard.three + this.currentBoard.six === winningScore
+        || this.currentBoard.one + this.currentBoard.four + this.currentBoard.seven === winningScore
+        || this.currentBoard.two + this.currentBoard.five + this.currentBoard.eight === winningScore
+        || this.currentBoard.zero + this.currentBoard.four + this.currentBoard.eight === winningScore
+        || this.currentBoard.two + this.currentBoard.four + this.currentBoard.six === winningScore) {
+      this.winner = player;
+      winner = this.winner;
     }
-    console.log('winner', winner);
-    this.winCounter(winner);
-    this.checkForGameDraw(game, winner);
+    this.winCounter(this.winner);
+    this.checkForGameDraw(game, this.winner);
+    this.winHistory(winner, this.currentBoard);
     this.disableAllButtons(winner);
-    // this.restartGame(winner);
-    this.winHistory(winner, currentBoard);
+    this.resetWinnerAndCurrentBoard();
+    this.restartGame(winner);
+    // console.log(currentGame.winner);
+  }
+
+  winHistory(winner, board) {
+    if (winner === 'player1') {
+      this.player1.historicalWins.push(board);
+    } else if (winner === 'player2') {
+      this.player2.historicalWins.push(board);
+    }
+  }
+
+  disableAllButtons(winner) {
+    if (winner === 'player1' || winner === 'player2') {
+      var nodeList = document.querySelectorAll('button');
+      for (var i = 0; i < nodeList.length; i++) {
+        nodeList[i].disabled = true;
+      }
+    }
   }
 
   checkForGameDraw(game, winner) {
-    if(!winner && (currentBoard.zero + currentBoard.one + currentBoard.two
-      + currentBoard.three + currentBoard.four + currentBoard.five
-      + currentBoard.six + currentBoard.seven + currentBoard.eight > 24)) {
+    if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
+      + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
+      + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
         console.log('draw');
-        winner = 'draw';
+        this.winner = 'draw';
+        winner = this.winner //can't use this in the restart timeout function
       }
-      this.restartGame(winner)
+      // this.resetWinnerAndCurrentBoard();
+      this.restartGame(winner);
   }
 
-  winCounter(winner) {
-    if (winner === 'player1') {
+  winCounter() {
+    if (this.winner === 'player1') {
       this.player1.wins ++;
-    } else if (winner === 'player2') {
-      this.player2.wins ++
+      renderWinMessage(this.player1.wins, this.winner);
+      // playerOneWins.innerText = `Player X: ${this.player1.wins} wins`;
+    } else if (this.winner === 'player2') {
+      this.player2.wins ++;
+      renderWinMessage(this.player2.wins, this.winner);
+      // playerTwoWins.innerText = `Player O: ${this.player2.wins} wins`;
     }
-    console.log('w1', this.player1.wins);
-    console.log('w2', this.player2.wins);
+    console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }
 
-  winHistory(winner, currentBoard) {
-    if (winner === 'player1') {
-      this.player1.historicalWins.push(currentBoard);
-    } else if (winner === 'player2') {
-      this.player2.historicalWins.push(currentBoard);
+  resetWinnerAndCurrentBoard() {
+    if (this.winner) {
+      this.winner = undefined;
+      this.createBoard();
     }
-    console.log('w1', this.player1.historicalWins);
-    console.log('w2', this.player2.historicalWins);
   }
-
 
   restartGame(winner) {
     setTimeout( function() { //can't breakup b/f of issue w/ this
       if (winner) {
-        //clear data model
-        currentBoard = {zero: 0, one: 0, two: 0, 
-          three: 0, four: 0, five: 0, 
-          six: 0, seven: 0, eight: 0};
-        //clear dom
         var nodeList = document.querySelectorAll('button');
         for (var i = 0; i < nodeList.length; i++) {
           nodeList[i].innerText = "";     //clear dom
@@ -100,15 +118,6 @@ class Game {
         }
       }
     }, 2000);
-  }
-
-  disableAllButtons(winner) {
-    if (winner) {
-      var nodeList = document.querySelectorAll('button');
-      for (var i = 0; i < nodeList.length; i++) {
-        nodeList[i].disabled = true;
-      }
-    }
   }
 
 }
