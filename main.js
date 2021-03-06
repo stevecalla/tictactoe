@@ -1,5 +1,8 @@
 // variables for querySelectors below
 var gameBoard = document.querySelector('#gameBoard');
+var nextTurnMessage = document.querySelector('#turnMessage');
+var renderWinsPlayerOne = document.querySelector('#playerOneWins');
+var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
 
 // global variables below
 var currentGame;
@@ -24,6 +27,23 @@ function playGame(event) {
 
 function renderTokenToBoard(player, game, event) {
   event.target.innerText = currentGame[player].token;
-  event.target.disabled = true;
-  
+  event.target.disabled = true; 
+}
+
+function renderNextTurnMessage(player) {
+  nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
+}
+
+function renderWinMessage(wins, winner) {
+  if (wins !== 1 && winner === 'player1') {
+    playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} wins`;
+  } else if (winner === 'player1') {
+    playerOneWins.innerText = `Player X: ${this.currentGame.player1.wins} win`;
+  }
+
+  if (wins !== 1 && winner === 'player2') {
+    playerTwoWins.innerText = `Player O: ${this.currentGame.player2.wins} wins`;
+  } else if (winner === 'player2') {
+    playerTwoWins.innerText = `Player O: ${this.currentGame.player2.wins} win`;
+  }
 }

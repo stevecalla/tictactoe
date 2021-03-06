@@ -14,8 +14,10 @@ class Game {
 
   playerTurn(event, targetKey, game) {
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
+      renderNextTurnMessage(this.currentPlayer);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
+      renderNextTurnMessage(this.currentPlayer);
       this.currentPlayer = 'player2';
     }
     this.updateGameTracker(this.currentPlayer, targetKey, game, event);
@@ -89,8 +91,12 @@ class Game {
   winCounter() {
     if (this.winner === 'player1') {
       this.player1.wins ++;
+      renderWinMessage(this.player1.wins, this.winner);
+      // playerOneWins.innerText = `Player X: ${this.player1.wins} wins`;
     } else if (this.winner === 'player2') {
-      this.player2.wins ++
+      this.player2.wins ++;
+      renderWinMessage(this.player2.wins, this.winner);
+      // playerTwoWins.innerText = `Player O: ${this.player2.wins} wins`;
     }
     console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }
