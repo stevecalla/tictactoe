@@ -7,25 +7,34 @@ class Player {
   }
 
   saveWinsToLocalStorage() {
-    localStorage.setItem(this.id, this.wins)
+    localStorage.setItem(this.id, JSON.stringify(this.historicalWins))
   }
 
   getWinsFromLocalStorage1() {
-    var getWinsFromLocalStorage = localStorage.getItem('1');
-    if(getWinsFromLocalStorage === null) {
-      getWinsFromLocalStorage = 0;
+    var parsedWinHistory;
+    var retrievedWinHistory = localStorage.getItem('1');
+    parsedWinHistory = JSON.parse(retrievedWinHistory);
+    if (parsedWinHistory !== null) {
+      currentGame.player1.historicalWins = parsedWinHistory;
+      currentGame.player1.wins = parsedWinHistory.length;
+      renderWinScore(currentGame.player1.wins, 'player1');
     }
-    currentGame.player1.wins = getWinsFromLocalStorage;
-    renderWinScore(currentGame.player1.wins, 'player1')
   }
 
   getWinsFromLocalStorage2() {
-    var getWinsFromLocalStorage = localStorage.getItem('5');
-    if(getWinsFromLocalStorage === null) {
-      getWinsFromLocalStorage = 0;
+    var parsedWinHistory;
+    var retrievedWinHistory = localStorage.getItem('5');
+    parsedWinHistory = JSON.parse(retrievedWinHistory);
+    if (parsedWinHistory !== null) {
+      currentGame.player2.historicalWins = parsedWinHistory;
+      currentGame.player2.wins = parsedWinHistory.length;
+      renderWinScore(currentGame.player2.wins, 'player2');
     }
-    currentGame.player2.wins = getWinsFromLocalStorage;
-    renderWinScore(currentGame.player2.wins, 'player2')
   }
+
+  // maybe button to reset game?
+  // deleteFromLocalStorage() {
+  //   localStorage.clear();
+  // }
 
 }
