@@ -136,6 +136,9 @@ button:disabled {
   .game-tile {
     height: 5rem;
     width: 6rem;
+    margin: 0;
+    font-size: 50px;
+    text-align: center;
   }
 
   .right-aside {
@@ -153,12 +156,6 @@ button:disabled {
   .grid-text {
     margin: 0;
     font-size: 40px;
-  }
-
-  .tile-text {
-    margin: 0;
-    font-size: 50px;
-    text-align: center;
   }
 
   .top-border {
