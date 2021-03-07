@@ -23,7 +23,6 @@ class Player {
         renderWinScore(currentGame[players[i]].wins, players[i]);
       }
     }
-
   }
 
   // maybe button to reset game?
