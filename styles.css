@@ -17,6 +17,7 @@ main {
   width: 25vw;
   text-align: center;
   background-color: yellow;
+  background-color: #FDE501;
 }
 
 .mini-boards {
@@ -116,16 +117,19 @@ main {
 }
 
 .top-border {
-  border-bottom: .75rem solid red;
+  border-bottom: .75rem solid blue;
+  /* border-radius: .25rem; */
 }
 
 .middle-border {
-  border-left: .75rem solid red;
-  border-right: .75rem solid red;
+  border-left: .75rem solid blue;
+  border-right: .75rem solid blue;
+  /* border-radius: .25rem; */
 }
 
 .bottom-border {
-  border-top: .75rem solid red;
+  border-top: .75rem solid blue;
+  /* border-radius: .25rem; */
 }
 
 button:disabled {
@@ -141,7 +145,7 @@ button:disabled {
   height: 100vh;
   width: 25vw;
   text-align: center;
-  background-color: yellow;
+  background-color: #FDE501;
 }
 
 /* ------------------MEDIA QUERIES MIN WIDTH 900px LARGE SCREEN-------------------- */
@@ -169,7 +173,7 @@ button:disabled {
   }
 
   .mini-boards {
-    border: 0.1rem solid black;
+    /* border: 0.1rem solid black; */
     height: 10vh;
     overflow: scroll;
   }

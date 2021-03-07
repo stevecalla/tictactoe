@@ -11,6 +11,7 @@ class Player {
   }
 
   getWinsFromLocalStorage() {
+    console.log('load')
     var parsedWinHistory;
     var playerIds = [1, 5];
     var players = ['player1', 'player2'];
@@ -21,6 +22,8 @@ class Player {
         currentGame[players[i]].historicalWins = parsedWinHistory;
         currentGame[players[i]].wins = parsedWinHistory.length;
         renderWinScore(currentGame[players[i]].wins, players[i]);
+        renderMiniWinCards1();
+        renderMiniWinCards2();
       }
     }
   }
