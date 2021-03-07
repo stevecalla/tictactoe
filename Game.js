@@ -25,7 +25,7 @@ class Game {
 
   updateGameTracker(player, targetKey, game, event) {
     this.currentBoard[targetKey] = this[player].id;
-    renderTokenToBoard(player, this.currentBoard, event);
+    renderTokenToBoard(player, this.currentBoard, targetKey, event);
     this.determineWinner(player, game)
   }
 
@@ -50,7 +50,7 @@ class Game {
       this.winner = player;
       winner = this.winner;
     }
-    this.winCounter(this.winner);
+    this.winCounter();
     this.checkForGameDraw(game, this.winner);
     this.winHistory(winner, this.currentBoard);
     this.disableAllButtons(winner);
@@ -60,10 +60,8 @@ class Game {
   }
 
   winHistory(winner, board) {
-    if (winner === 'player1') {
-      this.player1.historicalWins.push(board);
-    } else if (winner === 'player2') {
-      this.player2.historicalWins.push(board);
+    if (this.winner === 'player1' || this.winner === 'player2') {
+      this[this.winner].historicalWins.push(board);
     }
   }
 
@@ -83,24 +81,20 @@ class Game {
         console.log('draw');
         this.winner = 'draw';
         winner = this.winner //can't use this in the restart timeout function
+        nextTurnMessage.innerText = `It's a draw!`;//move to mainjs
       }
       // this.resetWinnerAndCurrentBoard();
       this.restartGame(winner);
   }
 
   winCounter() {
-    if (this.winner === 'player1') {
-      this.player1.wins ++;
-      renderWinScore(this.player1.wins, this.winner);
-      nextTurnMessage.innerText = `${this.player1.token} won!`;//move to mainjs
-      this.player1.saveWinsToLocalStorage();
-    } else if (this.winner === 'player2') {
-      this.player2.wins ++;
-      renderWinScore(this.player2.wins, this.winner);
-      nextTurnMessage.innerText = `${this.player2.token} won!`;//move to mainjs
-      this.player2.saveWinsToLocalStorage();
+    if (this.winner) {
+      this[this.winner].wins ++;
+      renderWinScore(this[this.winner].wins, this.winner);
+      nextTurnMessage.innerText = `${this[this.winner].token} won!`;//move to mainjs
+      this[this.winner].saveWinsToLocalStorage();
+      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
     }
-    console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }
 
   resetWinnerAndCurrentBoard() {

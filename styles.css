@@ -73,16 +73,16 @@ main {
   outline: none;
 }
 
-.top {
+.top-border {
   border-bottom: .75rem solid red;
 }
 
-.middle {
+.middle-border {
   border-left: .75rem solid red;
   border-right: .75rem solid red;
 }
 
-.bottom {
+.bottom-border {
   border-top: .75rem solid red;
 }
 
@@ -129,18 +129,46 @@ button:disabled {
   }
 
   .game-board {
-    height: 39vh;
-    width: 75vw;
+    height: 15rem;
+    width: 18rem;
   }
   
   .game-tile {
-    height: 13vh;
-    width: 25vw;
+    height: 5rem;
+    width: 6rem;
+    margin: 0;
+    font-size: 50px;
+    text-align: center;
   }
 
   .right-aside {
     height: 25vh;
     width: 100vw;
+  }
+
+  .page-text {
+    /* margin: 0; */
+    margin-top: 2vh;
+    font-size: 40px;
+  }
+  
+  .wins-text,
+  .grid-text {
+    margin: 0;
+    font-size: 40px;
+  }
+
+  .top-border {
+    border-bottom: .25rem solid red;
+  }
+  
+  .middle-border {
+    border-left: .25rem solid red;
+    border-right: .25rem solid red;
+  }
+  
+  .bottom-border {
+    border-top: .25rem solid red;
   }
 
 }

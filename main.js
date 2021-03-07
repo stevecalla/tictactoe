@@ -23,17 +23,19 @@ function startGame() {
 }
 
 function playGame(event) {
+  event.preventDefault();
   var targetKey = event.target.id;
   currentGame.playerTurn(event, targetKey, currentGame)
 }
 
-function renderTokenToBoard(player, game, event) {
-  event.target.innerText = currentGame[player].token;
+function renderTokenToBoard(player, game, targetKey, event) {
+  if (targetKey !== 'gameBoard') {
+    event.target.innerText = currentGame[player].token;
+  }
   event.target.disabled = true; 
 }
 
 function renderNextTurnMessage(player) {
-  console.log('mainjs', player)
   nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
 }
 
