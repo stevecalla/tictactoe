@@ -25,7 +25,7 @@ class Game {
 
   updateGameTracker(player, targetKey, game, event) {
     this.currentBoard[targetKey] = this[player].id;
-    renderTokenToBoard(player, this.currentBoard, event);
+    renderTokenToBoard(player, this.currentBoard, targetKey, event);
     this.determineWinner(player, game)
   }
 

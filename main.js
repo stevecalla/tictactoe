@@ -29,8 +29,10 @@ function playGame(event) {
   currentGame.playerTurn(event, targetKey, currentGame)
 }
 
-function renderTokenToBoard(player, game, event) {
-  event.target.innerText = currentGame[player].token;
+function renderTokenToBoard(player, game, targetKey, event) {
+  if (targetKey !== 'gameBoard') {
+    event.target.innerText = currentGame[player].token;
+  }
   event.target.disabled = true; 
 }
 
