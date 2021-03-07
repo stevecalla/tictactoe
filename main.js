@@ -23,6 +23,8 @@ function startGame() {
 }
 
 function playGame(event) {
+  event.preventDefault();
+  console.log(event);
   var targetKey = event.target.id;
   currentGame.playerTurn(event, targetKey, currentGame)
 }
