@@ -50,7 +50,7 @@ class Game {
       this.winner = player;
       winner = this.winner;
     }
-    this.winCounter(this.winner);
+    this.winCounter();
     this.checkForGameDraw(game, this.winner);
     this.winHistory(winner, this.currentBoard);
     this.disableAllButtons(winner);
@@ -90,18 +90,13 @@ class Game {
   }
 
   winCounter() {
-    if (this.winner === 'player1') {
-      this.player1.wins ++;
-      renderWinScore(this.player1.wins, this.winner);
-      nextTurnMessage.innerText = `${this.player1.token} won!`;//move to mainjs
-      this.player1.saveWinsToLocalStorage();
-    } else if (this.winner === 'player2') {
-      this.player2.wins ++;
-      renderWinScore(this.player2.wins, this.winner);
-      nextTurnMessage.innerText = `${this.player2.token} won!`;//move to mainjs
-      this.player2.saveWinsToLocalStorage();
+    if (this.winner) {
+      this[this.winner].wins ++;
+      renderWinScore(this[this.winner].wins, this.winner);
+      nextTurnMessage.innerText = `${this[this.winner].token} won!`;//move to mainjs
+      this[this.winner].saveWinsToLocalStorage();
+      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
     }
-    console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
   }
 
   resetWinnerAndCurrentBoard() {
