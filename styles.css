@@ -11,26 +11,19 @@ main {
   display: flex;
 }
 
-/*--------------------------LEFT ASIDE---------------------*/
-.left-aside {
+/*--------------------------LEFT/RIGHT ASIDE---------------------*/
+.left-aside,
+.right-aside {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 25vw;
-  text-align: center;
-  background-color: yellow;
   background-color: #FDE501;
-}
-
-.mini-boards {
-  /* border: 1rem solid red; */
-  display: flex;
-  flex-wrap: wrap;
-  height: 65vh;
-  overflow: scroll;
 }
 
 .mini-game-board {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -38,10 +31,17 @@ main {
   width: 6vw;
   margin-left: 1.5vw;
   margin-bottom: 2vw;
-  /* margin-right: 1vw; */
   color: none;
   background-color: white;
-  /* overflow: scroll; */
+}
+
+.mini-boards-player1,
+.mini-boards-player2 {
+  display: flex;
+  flex-wrap: wrap;
+  height: 65vh;
+  width: 25vw;
+  overflow: scroll;
 }
 
 .mini-game-tile {
@@ -137,14 +137,6 @@ main {
   cursor: none;
 }
 
-/*--------------------------RIGHT ASIDE---------------------*/
-.right-aside {
-  height: 100vh;
-  width: 25vw;
-  text-align: center;
-  background-color: #FDE501;
-}
-
 /* ------------------MEDIA QUERIES MIN WIDTH 900px LARGE SCREEN-------------------- */
 @media screen and (min-width: 900px) {
 }
@@ -161,7 +153,8 @@ main {
     flex-direction: column;
   }
 
-  .left-aside {
+  .left-aside, 
+  .right-aside {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -170,8 +163,10 @@ main {
   }
 
   .mini-boards {
-    /* border: 0.1rem solid black; */
-    height: 10vh;
+    border: 0.1rem solid black;
+    height: 15vh;
+    width: 50vw;
+    margin: 5vw;
     overflow: scroll;
   }
 
@@ -194,7 +189,7 @@ main {
 
   .game-board {
     height: 15rem;
-    width: 18rem;
+    width: 21rem;
   }
   
   .game-tile {
@@ -203,11 +198,6 @@ main {
     margin: 0;
     font-size: 50px;
     text-align: center;
-  }
-
-  .right-aside {
-    height: 25vh;
-    width: 100vw;
   }
 
   .player-emoji {
@@ -230,16 +220,16 @@ main {
   }
 
   .top-border {
-    border-bottom: .25rem solid red;
+    border-bottom: .25rem solid blue;
   }
   
   .middle-border {
-    border-left: .25rem solid red;
-    border-right: .25rem solid red;
+    border-left: .25rem solid blue;
+    border-right: .25rem solid blue;
   }
   
   .bottom-border {
-    border-top: .25rem solid red;
+    border-top: .25rem solid blue;
   }
 
 }
