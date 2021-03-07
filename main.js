@@ -33,7 +33,8 @@ function renderTokenToBoard(player, game, targetKey, event) {
   if (targetKey !== 'gameBoard') {
     event.target.innerText = currentGame[player].token;
   }
-  event.target.disabled = true; 
+  // event.target.disabled = true;
+  event.target.classList.add('disable');
 }
 
 function renderNextTurnMessage(player) {

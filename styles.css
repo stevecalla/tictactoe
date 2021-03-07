@@ -140,6 +140,10 @@ button:disabled {
   background: none;
 }
 
+.disable {
+  pointer-events: none;
+}
+
 /*--------------------------RIGHT ASIDE---------------------*/
 .right-aside {
   height: 100vh;
