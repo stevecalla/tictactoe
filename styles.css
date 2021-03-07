@@ -106,8 +106,8 @@ main {
 .game-tile {
   border: .1rem solid red;
   border: none;
-  height: 25vh;
-  width: 15vw;
+  height: 24vh;
+  width: 12vw;
   margin: 0;
   padding: 0;
   font-size: 100px;

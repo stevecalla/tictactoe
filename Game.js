@@ -85,9 +85,8 @@ class Game {
 
   disableAllButtons(winner) { //put in mainjs?
     if (winner === 'player1' || winner === 'player2') {
-      var nodeList = document.querySelectorAll('button');
+      var nodeList = document.querySelectorAll('.game-tile');
       for (var i = 0; i < nodeList.length; i++) {
-        // nodeList[i].disabled = true;
         nodeList[i].classList.add('disable');
       }
     }
@@ -135,7 +134,6 @@ class Game {
       var nodeList = document.querySelectorAll('.game-tile');
       for (var i = 0; i < nodeList.length; i++) {
         nodeList[i].innerText = "";     //clear dom
-        // nodeList[i].disabled = false;  //enable buttons
         nodeList[i].classList.remove('disable');
         }
       }
