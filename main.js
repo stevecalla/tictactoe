@@ -24,7 +24,6 @@ function startGame() {
 
 function playGame(event) {
   event.preventDefault();
-  console.log(event);
   var targetKey = event.target.id;
   currentGame.playerTurn(event, targetKey, currentGame)
 }
@@ -37,7 +36,6 @@ function renderTokenToBoard(player, game, targetKey, event) {
 }
 
 function renderNextTurnMessage(player) {
-  console.log('mainjs', player)
   nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
 }
 
