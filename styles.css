@@ -132,16 +132,9 @@ main {
   /* border-radius: .25rem; */
 }
 
-button:disabled {
-  background-color: #EFEFEF;
-  cursor: not-allowed;
-  color: #c0c0c0;
-  /* background-color: #EFEFEF; */
-  background: none;
-}
-
 .disable {
   pointer-events: none;
+  cursor: none;
 }
 
 /*--------------------------RIGHT ASIDE---------------------*/
