@@ -10,26 +10,20 @@ class Player {
     localStorage.setItem(this.id, JSON.stringify(this.historicalWins))
   }
 
-  getWinsFromLocalStorage1() {
+  getWinsFromLocalStorage() {
     var parsedWinHistory;
-    var retrievedWinHistory = localStorage.getItem('1');
-    parsedWinHistory = JSON.parse(retrievedWinHistory);
-    if (parsedWinHistory !== null) {
-      currentGame.player1.historicalWins = parsedWinHistory;
-      currentGame.player1.wins = parsedWinHistory.length;
-      renderWinScore(currentGame.player1.wins, 'player1');
+    var playerIds = [1, 5];
+    var players = ['player1', 'player2'];
+    for (var i = 0; i < playerIds.length; i++) {
+      var retrievedWinHistory = localStorage.getItem(playerIds[i]);
+      parsedWinHistory = JSON.parse(retrievedWinHistory);
+      if (parsedWinHistory !== null) {
+        currentGame[players[i]].historicalWins = parsedWinHistory;
+        currentGame[players[i]].wins = parsedWinHistory.length;
+        renderWinScore(currentGame[players[i]].wins, players[i]);
+      }
     }
-  }
 
-  getWinsFromLocalStorage2() {
-    var parsedWinHistory;
-    var retrievedWinHistory = localStorage.getItem('5');
-    parsedWinHistory = JSON.parse(retrievedWinHistory);
-    if (parsedWinHistory !== null) {
-      currentGame.player2.historicalWins = parsedWinHistory;
-      currentGame.player2.wins = parsedWinHistory.length;
-      renderWinScore(currentGame.player2.wins, 'player2');
-    }
   }
 
   // maybe button to reset game?
