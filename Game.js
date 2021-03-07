@@ -83,6 +83,7 @@ class Game {
         console.log('draw');
         this.winner = 'draw';
         winner = this.winner //can't use this in the restart timeout function
+        nextTurnMessage.innerText = `It's a draw!`;//move to mainjs
       }
       // this.resetWinnerAndCurrentBoard();
       this.restartGame(winner);
