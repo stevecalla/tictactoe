@@ -114,7 +114,7 @@ class Game {
     setTimeout( function() { //can't breakup b/f of issue w/ this
     if (winner) {
       renderNextTurnMessage(nextPlayer);
-      var nodeList = document.querySelectorAll('button');
+      var nodeList = document.querySelectorAll('.game-tile');
       for (var i = 0; i < nodeList.length; i++) {
         nodeList[i].innerText = "";     //clear dom
         nodeList[i].disabled = false;  //enable buttons
