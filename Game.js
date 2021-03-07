@@ -62,6 +62,7 @@ class Game {
   winHistory(winner, board) {
     if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalWins.push(board);
+      this[this.winner].saveWinsToLocalStorage();
     }
   }
 
@@ -92,7 +93,6 @@ class Game {
       this[this.winner].wins ++;
       renderWinScore(this[this.winner].wins, this.winner);
       nextTurnMessage.innerText = `${this[this.winner].token} won!`;//move to mainjs
-      this[this.winner].saveWinsToLocalStorage();
       console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
     }
   }
