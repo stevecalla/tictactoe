@@ -53,11 +53,9 @@ class Game {
     this.winCounter();
     this.checkForGameDraw(game, this.winner);
     this.convertWinBoardToEmoji(winner, this.currentBoard);
-    // this.winHistory(winner, this.currentBoard);
     this.disableAllButtons(winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(winner, this.currentPlayer);
-    // console.log(currentGame.winner);
   }
 
   convertWinBoardToEmoji(winner, board) {
@@ -79,8 +77,7 @@ class Game {
     if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalWins.push(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
-      renderMiniWinCards1();
-      renderMiniWinCards2();
+      createMiniWinBoards(winner);
     }
   }
 

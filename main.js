@@ -55,44 +55,31 @@ function renderWinScore(wins, winner) {
   }
 }
 
-function renderMiniWinCards1() {
-  miniGameBoardsPlayer1.innerHTML = "";
-  console.log(currentGame.player1.historicalWins);
-  for (var i = 0; i < currentGame.player1.historicalWins.length; i++) {
-    miniGameBoardsPlayer1.innerHTML += 
+function createMiniWinBoards(winner) {
+  var createMiniBoardCards = '';
+  for (var i = 0; i < currentGame[winner].historicalWins.length; i++) {
+    createMiniBoardCards += 
     `          
       <div class="mini-game-board" id="miniGameBoard">
-        <button class='mini-game-tile' id='zero'>${currentGame.player1.historicalWins[i].zero}</button>
-        <button class='mini-game-tile' id='one'>${currentGame.player1.historicalWins[i].one}</button>
-        <button class='mini-game-tile' id='two'>${currentGame.player1.historicalWins[i].two}</button>
-        <button class='mini-game-tile' id='three'>${currentGame.player1.historicalWins[i].three}</button>
-        <button class='mini-game-tile' id='four'>${currentGame.player1.historicalWins[i].four}</button>
-        <button class='mini-game-tile' id='five'>${currentGame.player1.historicalWins[i].five}</button>
-        <button class='mini-game-tile' id='six'>${currentGame.player1.historicalWins[i].six}</button>
-        <button class='mini-game-tile' id='seven'>${currentGame.player1.historicalWins[i].seven}</button>
-        <button class='mini-game-tile' id='eight'>${currentGame.player1.historicalWins[i].eight}</button>
+        <button class='mini-game-tile' id='zero'>${currentGame[winner].historicalWins[i].zero}</button>
+        <button class='mini-game-tile' id='one'>${currentGame[winner].historicalWins[i].one}</button>
+        <button class='mini-game-tile' id='two'>${currentGame[winner].historicalWins[i].two}</button>
+        <button class='mini-game-tile' id='three'>${currentGame[winner].historicalWins[i].three}</button>
+        <button class='mini-game-tile' id='four'>${currentGame[winner].historicalWins[i].four}</button>
+        <button class='mini-game-tile' id='five'>${currentGame[winner].historicalWins[i].five}</button>
+        <button class='mini-game-tile' id='six'>${currentGame[winner].historicalWins[i].six}</button>
+        <button class='mini-game-tile' id='seven'>${currentGame[winner].historicalWins[i].seven}</button>
+        <button class='mini-game-tile' id='eight'>${currentGame[winner].historicalWins[i].eight}</button>
       </div>
       `;
   }
+  renderMiniWinCards(winner, createMiniBoardCards);
 }
 
-function renderMiniWinCards2() {
-  miniGameBoardsPlayer2.innerHTML = "";
-  console.log(currentGame.player2.historicalWins);
-  for (var i = 0; i < currentGame.player2.historicalWins.length; i++) {
-    miniGameBoardsPlayer2.innerHTML += 
-    `          
-      <div class="mini-game-board" id="miniGameBoard">
-        <button class='mini-game-tile' id='zero'>${currentGame.player2.historicalWins[i].zero}</button>
-        <button class='mini-game-tile' id='one'>${currentGame.player2.historicalWins[i].one}</button>
-        <button class='mini-game-tile' id='two'>${currentGame.player2.historicalWins[i].two}</button>
-        <button class='mini-game-tile' id='three'>${currentGame.player2.historicalWins[i].three}</button>
-        <button class='mini-game-tile' id='four'>${currentGame.player2.historicalWins[i].four}</button>
-        <button class='mini-game-tile' id='five'>${currentGame.player2.historicalWins[i].five}</button>
-        <button class='mini-game-tile' id='six'>${currentGame.player2.historicalWins[i].six}</button>
-        <button class='mini-game-tile' id='seven'>${currentGame.player2.historicalWins[i].seven}</button>
-        <button class='mini-game-tile' id='eight'>${currentGame.player2.historicalWins[i].eight}</button>
-      </div>
-      `;
+function renderMiniWinCards(winner, miniCards) {
+  if (winner === 'player1') {
+    miniGameBoardsPlayer1.innerHTML = miniCards;
+  } else if (winner === 'player2') {
+    miniGameBoardsPlayer2.innerHTML = miniCards;
   }
 }
