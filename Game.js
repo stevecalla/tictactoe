@@ -60,10 +60,8 @@ class Game {
   }
 
   winHistory(winner, board) {
-    if (winner === 'player1') {
-      this.player1.historicalWins.push(board);
-    } else if (winner === 'player2') {
-      this.player2.historicalWins.push(board);
+    if (this.winner === 'player1' || this.winner === 'player2') {
+      this[this.winner].historicalWins.push(board);
     }
   }
 
