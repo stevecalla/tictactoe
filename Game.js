@@ -64,54 +64,15 @@ class Game {
     var emojiBoard = {zero: "", one: "", two: "", 
                       three: "", four: "", five: "", 
                       six: "", seven: "", eight: ""};
-    // var abc = [zero, one, two, three, four, five, six, seven, eight];
-    if (board.zero === 5) {
-      emojiBoard.zero = this.player2.token;
-    } else if (board.zero === 1) {
-        emojiBoard.zero = this.player1.token
-    }
-    if (board.one === 5) {
-      emojiBoard.one = this.player2.token;
-    } else if (board.one === 1) {
-      emojiBoard.one = this.player1.token
-    }
-    if (board.two === 5) {
-      emojiBoard.two = this.player2.token;
-    } else if (board.two === 1) {
-      emojiBoard.two = this.player1.token
-    }
-    if (board.three === 5) {
-      emojiBoard.three = this.player2.token;
-    } else if (board.three === 1) {
-      emojiBoard.three = this.player1.token
-    }
-    if (board.four === 5) {
-      emojiBoard.four = this.player2.token;
-    } else if (board.four === 1) {
-      emojiBoard.four = this.player1.token
-    }
-    if (board.five === 5) {
-      emojiBoard.five = this.player2.token;
-    } else if (board.five === 1) {
-      emojiBoard.five = this.player1.token
-    }
-    if (board.six === 5) {
-      emojiBoard.six = this.player2.token;
-    } else if (board.six === 1) {
-      emojiBoard.six = this.player1.token
-    }
-    if (board.seven === 5) {
-      emojiBoard.seven = this.player2.token;
-    } else if (board.seven === 1) {
-      emojiBoard.seven = this.player1.token
-    }
-    if (board.eight === 5) {
-      emojiBoard.eight = this.player2.token;
-    } else if (board.eight === 1) {
-      emojiBoard.eight = this.player1.token
+    var keys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+    for (var i = 0; i < keys.length; i++) {
+      if (board[keys[i]] === 5) {
+        emojiBoard[keys[i]] = this.player2.token;
+      } else if (board[keys[i]] === 1) {
+        emojiBoard[keys[i]] = this.player1.token;
+      }
     }
     this.winHistory(winner, emojiBoard);
-
   }
 
   winHistory(winner, emojiBoard) {
