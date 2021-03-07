@@ -59,19 +59,19 @@ function createMiniWinBoards(winner) {
   var createMiniBoardCards = '';
   for (var i = 0; i < currentGame[winner].historicalWins.length; i++) {
     createMiniBoardCards += 
-    `          
-      <div class="mini-game-board" id="miniGameBoard">
-        <button class='mini-game-tile' id='zero'>${currentGame[winner].historicalWins[i].zero}</button>
-        <button class='mini-game-tile' id='one'>${currentGame[winner].historicalWins[i].one}</button>
-        <button class='mini-game-tile' id='two'>${currentGame[winner].historicalWins[i].two}</button>
-        <button class='mini-game-tile' id='three'>${currentGame[winner].historicalWins[i].three}</button>
-        <button class='mini-game-tile' id='four'>${currentGame[winner].historicalWins[i].four}</button>
-        <button class='mini-game-tile' id='five'>${currentGame[winner].historicalWins[i].five}</button>
-        <button class='mini-game-tile' id='six'>${currentGame[winner].historicalWins[i].six}</button>
-        <button class='mini-game-tile' id='seven'>${currentGame[winner].historicalWins[i].seven}</button>
-        <button class='mini-game-tile' id='eight'>${currentGame[winner].historicalWins[i].eight}</button>
-      </div>
-      `;
+      `          
+        <div class="mini-game-board" id="miniGameBoard">
+          <article class='mini-game-tile' id='zero'>${currentGame[winner].historicalWins[i].zero}</article>
+          <article class='mini-game-tile' id='one'>${currentGame[winner].historicalWins[i].one}</article>
+          <article class='mini-game-tile' id='two'>${currentGame[winner].historicalWins[i].two}</article>
+          <article class='mini-game-tile' id='three'>${currentGame[winner].historicalWins[i].three}</article>
+          <article class='mini-game-tile' id='four'>${currentGame[winner].historicalWins[i].four}</article>
+          <article class='mini-game-tile' id='five'>${currentGame[winner].historicalWins[i].five}</article>
+          <article class='mini-game-tile' id='six'>${currentGame[winner].historicalWins[i].six}</article>
+          <article class='mini-game-tile' id='seven'>${currentGame[winner].historicalWins[i].seven}</article>
+          <article class='mini-game-tile' id='eight'>${currentGame[winner].historicalWins[i].eight}</article>
+        </div>
+        `;
   }
   renderMiniWinCards(winner, createMiniBoardCards);
 }
