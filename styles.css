@@ -143,4 +143,21 @@ button:disabled {
     width: 100vw;
   }
 
+  .page-text {
+    margin: 0;
+    /* margin-top: 10vh; */
+    font-size: 25px;
+    color: #6B88F9;
+    text-align: center;
+  }
+  
+  .wins-text,
+  .grid-text {
+    /* margin: 0; */
+    /* margin-bottom: 2vh; */
+    /* font-size: 25px; */
+    /* color: #6B88F9; */
+    /* text-align: center; */
+  }
+
 }
