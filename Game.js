@@ -10,7 +10,7 @@ class Game {
   }
 
 
-  playerTurn(event, targetKey, game) {
+  assignPlayerTurn(event, targetKey) {
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
       renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player1';
@@ -18,31 +18,31 @@ class Game {
       renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player2';
     }
-    this.updateGameTracker(this.currentPlayer, targetKey, game, event);
+    this.updateGameTracker(this.currentPlayer, targetKey, event);
   }
 
-  updateGameTracker(player, targetKey, game, event) {
+  updateGameTracker(player, targetKey, event) {
     this.currentBoard[targetKey] = this[player].id;
     renderTokenToBoard(player, targetKey, event);
-    this.setWinningScore(player, game);
+    this.setWinningScore(player);
   }
 
-  setWinningScore(player, game) {
+  setWinningScore(player) {
     var winningScore = 3;
     if (player === 'player2') {
       var winningScore = 15;
     } 
-    this.setWinnngCombinations(player, game, winningScore)
+    this.setWinnngCombinations(player, winningScore)
   }
 
-  setWinnngCombinations(player, game, winningScore) {
+  setWinnngCombinations(player, winningScore) {
     var winningCombos = [['zero', 'one', 'two'], ['three', 'four', 'five'], ['six', 'seven', 'eight'], 
                          ['zero', 'three', 'six'], ['one', 'four', 'seven'], ['two', 'five', 'eight'],
                          ['zero', 'four', 'eight'], ['two', 'four', 'six']];
-    this.determineWinner(player, game, winningScore, winningCombos);
+    this.determineWinner(player, winningScore, winningCombos);
   }
 
-  determineWinner(player, game, winningScore, winningCombos) {
+  determineWinner(player, winningScore, winningCombos) {
     for (var i = 0; i < winningCombos.length; i++) {
       if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
           this.currentBoard[winningCombos[i][2]] === winningScore) {
@@ -50,7 +50,7 @@ class Game {
       }
     }
     this.winCounter();
-    this.checkForGameDraw(game, this.winner);
+    this.checkForGameDraw(this.winner);
     this.convertWinBoardToEmojis(this.winner, this.currentBoard);
     this.disableAllButtons(this.winner);
     this.resetWinnerAndCurrentBoard();
@@ -87,7 +87,7 @@ class Game {
     }
   }
 
-  checkForGameDraw(game, winner) {
+  checkForGameDraw(winner) {
     if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {

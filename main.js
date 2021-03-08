@@ -16,9 +16,7 @@ gameBoard.addEventListener('click', playGame);
 
 //functions below
 function startGame() {
-  // var currentGame;
   currentGame = new Game('player2');
-  // currentGame.createBoard();
   currentGame.player1.token = '🥵'; 
   currentGame.player2.token = '🥶';
   currentGame.player1.getWinsFromLocalStorage();
@@ -27,7 +25,7 @@ function startGame() {
 function playGame(event) {
   event.preventDefault();
   var targetKey = event.target.id;
-  currentGame.playerTurn(event, targetKey, currentGame)
+  currentGame.assignPlayerTurn(event, targetKey)
 }
 
 function renderTokenToBoard(player, targetKey, event) {
