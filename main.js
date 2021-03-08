@@ -29,15 +29,17 @@ function playGame(event) {
   currentGame.playerTurn(event, targetKey, currentGame)
 }
 
-function renderTokenToBoard(player, game, targetKey, event) {
+function renderTokenToBoard(player, targetKey, event) {
   if (targetKey !== 'gameBoard') {
     event.target.innerText = currentGame[player].token;
     event.target.classList.add('disable');
   }
 }
 
-function renderNextTurnMessage(player) {
-  nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
+function renderNextTurnMessage(player, targetKey) {
+  if (targetKey !== 'gameBoard') {
+    nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
+  }
 }
 
 function renderDrawMessage() {

@@ -9,18 +9,13 @@ class Game {
       six: 0, seven: 0, eight: 0};
   }
 
-  // createBoard() {
-  //   this.currentBoard = {zero: 0, one: 0, two: 0, 
-  //                       three: 0, four: 0, five: 0, 
-  //                       six: 0, seven: 0, eight: 0};
-  // }
 
   playerTurn(event, targetKey, game) {
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer, 0);
+      renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer, 0);
+      renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player2';
     }
     this.updateGameTracker(this.currentPlayer, targetKey, game, event);
@@ -28,8 +23,7 @@ class Game {
 
   updateGameTracker(player, targetKey, game, event) {
     this.currentBoard[targetKey] = this[player].id;
-    renderTokenToBoard(player, this.currentBoard, targetKey, event);
-    // this.determineWinner(player, game);
+    renderTokenToBoard(player, targetKey, event);
     this.setWinningScore(player, game);
   }
 
