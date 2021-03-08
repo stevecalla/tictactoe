@@ -126,16 +126,7 @@ class Game {
     } else {
       nextPlayer = 'player1';
     }
-
-    setTimeout( function() { //can't breakup b/f of issue w/ this
-    if (winner) {
-      renderNextTurnMessage(nextPlayer);
-      for (var i = 0; i < gameTile.length; i++) {
-        gameTile[i].innerText = "";     //clear dom
-        gameTile[i].classList.remove('disable');
-        }
-      }
-    }, 2000);
+    callTimeOut(winner, nextPlayer);
   }
 
 }

@@ -105,3 +105,15 @@ function renderMiniWinCards(winner, miniCards) {
     miniGameBoardsPlayer2.innerHTML = miniCards;
   }
 }
+
+function callTimeOut(winner, nextPlayer) {
+  setTimeout( function() {
+  if (winner) {
+    renderNextTurnMessage(nextPlayer);
+    for (var i = 0; i < gameTile.length; i++) {
+      gameTile[i].innerText = "";
+      gameTile[i].classList.remove('disable');
+      }
+    }
+  }, 2000);
+}
