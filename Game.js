@@ -82,9 +82,8 @@ class Game {
 
   disableAllButtons(winner) { //put in mainjs?
     if (winner === 'player1' || winner === 'player2') {
-      var nodeList = document.querySelectorAll('.game-tile');
-      for (var i = 0; i < nodeList.length; i++) {
-        nodeList[i].classList.add('disable');
+      for (var i = 0; i < gameTile.length; i++) {
+        gameTile[i].classList.add('disable');
       }
     }
   }
@@ -131,10 +130,9 @@ class Game {
     setTimeout( function() { //can't breakup b/f of issue w/ this
     if (winner) {
       renderNextTurnMessage(nextPlayer);
-      var nodeList = document.querySelectorAll('.game-tile');
-      for (var i = 0; i < nodeList.length; i++) {
-        nodeList[i].innerText = "";     //clear dom
-        nodeList[i].classList.remove('disable');
+      for (var i = 0; i < gameTile.length; i++) {
+        gameTile[i].innerText = "";     //clear dom
+        gameTile[i].classList.remove('disable');
         }
       }
     }, 2000);

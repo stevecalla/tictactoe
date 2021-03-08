@@ -5,6 +5,7 @@ var renderWinsPlayerOne = document.querySelector('#playerOneWins');
 var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
 var miniGameBoardsPlayer1 = document.querySelector('.mini-boards-player1');
 var miniGameBoardsPlayer2 = document.querySelector('.mini-boards-player2');
+var gameTile = document.querySelectorAll('.game-tile');
 
 // global variables below
 var currentGame;
