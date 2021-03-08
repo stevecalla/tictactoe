@@ -165,13 +165,13 @@ main {
   .mini-boards {
     border: 0.1rem solid black;
     height: 20vh;
-    width: 60vw;
+    width: 62vw;
     overflow: scroll;
   }
 
   .mini-game-board {
     height: 11vh;
-    width: 17vw;
+    width: 19vw;
   }
 
   .mini-game-tile {
