@@ -64,6 +64,19 @@ function renderWinScore(wins, winner) {
   }
 }
 
+function convertWinBoardToEmojis(board) {
+  var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
+  var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+  for (var i = 0; i < boardKeys.length; i++) {
+    if (board[boardKeys[i]] === 5) {
+      emojiBoard[boardKeys[i]] = currentGame.player2.token;
+    } else if (board[boardKeys[i]] === 1) {
+      emojiBoard[boardKeys[i]] = currentGame.player1.token;
+    }
+  }
+  currentGame.winHistory(emojiBoard);
+}
+
 function createMiniWinBoards(winner) {
   var createMiniBoardCards = '';
   for (var i = 0; i < currentGame[winner].historicalWins.length; i++) {
