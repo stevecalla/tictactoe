@@ -71,6 +71,7 @@ main {
   margin: 0;
   margin-bottom: 2vh;
   font-size: 70px;
+  font-weight: lighter;
   color: black;
   text-align: center;
 }
