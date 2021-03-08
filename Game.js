@@ -26,51 +26,68 @@ class Game {
   updateGameTracker(player, targetKey, game, event) {
     this.currentBoard[targetKey] = this[player].id;
     renderTokenToBoard(player, this.currentBoard, targetKey, event);
-    this.determineWinner(player, game)
+    // this.determineWinner(player, game);
+    this.setWinningScore(player, game);
   }
 
-  determineWinner(player, game) {
+  setWinningScore(player, game) {
     var winner;
     var winningScore = 3;
     if (player === 'player2') {
       var winningScore = 15;
     } 
-    this.checkForPlayerWin(player, game, winner, winningScore);
+    this.setWinnngCombinations(player, game, winner, winningScore)
   }
 
-  checkForPlayerWin(player, game, winner, winningScore) {
-    if (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two === winningScore
-        || this.currentBoard.three + this.currentBoard.four + this.currentBoard.five === winningScore
-        || this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight === winningScore
-        || this.currentBoard.zero + this.currentBoard.three + this.currentBoard.six === winningScore
-        || this.currentBoard.one + this.currentBoard.four + this.currentBoard.seven === winningScore
-        || this.currentBoard.two + this.currentBoard.five + this.currentBoard.eight === winningScore
-        || this.currentBoard.zero + this.currentBoard.four + this.currentBoard.eight === winningScore
-        || this.currentBoard.two + this.currentBoard.four + this.currentBoard.six === winningScore) {
-      this.winner = player;
-      winner = this.winner;
+  setWinnngCombinations(player, game, winner, winningScore) {
+    var winningCombos = [['zero', 'one', 'two'], ['three', 'four', 'five'], ['six', 'seven', 'eight'], 
+                         ['zero', 'three', 'six'], ['one', 'four', 'seven'], ['two', 'five', 'eight'],
+                         ['zero', 'four', 'eight'], ['two', 'four', 'six']];
+    this.determineWinner(player, game, winner, winningScore, winningCombos);
+  }
+
+  determineWinner(player, game, winner, winningScore, winningCombos) {
+    for (var i = 0; i < winningCombos.length; i++) {
+      if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
+          this.currentBoard[winningCombos[i][2]] === winningScore) {
+        this.winner = player;
+        winner = this.winner;
+      }
     }
     this.winCounter();
     this.checkForGameDraw(game, this.winner);
-    this.winHistory(winner, this.currentBoard);
+    this.convertWinBoardToEmojis(winner, this.currentBoard);
     this.disableAllButtons(winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(winner, this.currentPlayer);
-    // console.log(currentGame.winner);
   }
 
-  winHistory(winner, board) {
+  convertWinBoardToEmojis(winner, board) {
+    var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
+    var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+    for (var i = 0; i < boardKeys.length; i++) {
+      if (board[boardKeys[i]] === 5) {
+        emojiBoard[boardKeys[i]] = this.player2.token;
+      } else if (board[boardKeys[i]] === 1) {
+        emojiBoard[boardKeys[i]] = this.player1.token;
+      }
+    }
+    this.winHistory(winner, emojiBoard);
+  }
+
+  winHistory(winner, emojiBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
-      this[this.winner].historicalWins.push(board);
+      this[this.winner].historicalWins.push(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
+      createMiniWinBoards(winner);
     }
   }
 
-  disableAllButtons(winner) {
+  disableAllButtons(winner) { //put in mainjs?
     if (winner === 'player1' || winner === 'player2') {
-      var nodeList = document.querySelectorAll('button');
+      var nodeList = document.querySelectorAll('.game-tile');
       for (var i = 0; i < nodeList.length; i++) {
-        nodeList[i].disabled = true;
+        nodeList[i].classList.add('disable');
       }
     }
   }
@@ -114,10 +131,10 @@ class Game {
     setTimeout( function() { //can't breakup b/f of issue w/ this
     if (winner) {
       renderNextTurnMessage(nextPlayer);
-      var nodeList = document.querySelectorAll('button');
+      var nodeList = document.querySelectorAll('.game-tile');
       for (var i = 0; i < nodeList.length; i++) {
         nodeList[i].innerText = "";     //clear dom
-        nodeList[i].disabled = false;  //enable buttons
+        nodeList[i].classList.remove('disable');
         }
       }
     }, 2000);

@@ -21,6 +21,7 @@ class Player {
         currentGame[players[i]].historicalWins = parsedWinHistory;
         currentGame[players[i]].wins = parsedWinHistory.length;
         renderWinScore(currentGame[players[i]].wins, players[i]);
+        createMiniWinBoards(players[i]);
       }
     }
   }

@@ -11,22 +11,59 @@ main {
   display: flex;
 }
 
-/*--------------------------LEFT ASIDE---------------------*/
-.left-aside {
+/*--------------------------LEFT/RIGHT ASIDE---------------------*/
+.left-aside,
+.right-aside {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 25vw;
-  text-align: center;
-  background-color: yellow;
+  background-color: black;
 }
 
+.mini-game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 14vh;
+  width: 10vw;
+  margin-left: 1.5vw;
+  margin-bottom: 2vw;
+  color: none;
+  background-color: white;
+}
+
+.mini-boards-player1,
+.mini-boards-player2 {
+  display: flex;
+  flex-wrap: wrap;
+  height: 65vh;
+  width: 25vw;
+  overflow: scroll;
+}
+
+.mini-game-tile {
+  height: 4vh;
+  width: 3vw;
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  text-align: center;
+  background: none;
+  outline: none;
+  /* overflow: scroll; */
+}
 /*--------------------------TEXT FORMATING---------------------*/
 
 .player-emoji {
   margin: 0;
-  margin-top: 10vh;
+  margin-bottom: 0;
+  margin-top: 8vh;
   font-size: 70px;
   color: #6B88F9;
-  /* text-align: center; */
+  text-align: center;
 }
 
 .wins-text,
@@ -34,8 +71,13 @@ main {
   margin: 0;
   margin-bottom: 2vh;
   font-size: 70px;
-  color: #6B88F9;
-  /* text-align: center; */
+  color: black;
+  text-align: center;
+}
+
+.wins-text {
+  margin-bottom: 0;
+  color: white;
 }
 
 /*--------------------------GAME BOARD SECTION---------------------*/
@@ -61,10 +103,11 @@ main {
 }
 
 .game-tile {
-  border: .1rem solid red;
-  border: none;
-  height: 25vh;
-  width: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24vh;
+  width: 12vw;
   margin: 0;
   padding: 0;
   font-size: 100px;
@@ -74,32 +117,24 @@ main {
 }
 
 .top-border {
-  border-bottom: .75rem solid red;
+  border-bottom: .75rem solid black;
+  /* border-radius: .25rem; */
 }
 
 .middle-border {
-  border-left: .75rem solid red;
-  border-right: .75rem solid red;
+  border-left: .75rem solid black;
+  border-right: .75rem solid black;
+  /* border-radius: .25rem; */
 }
 
 .bottom-border {
-  border-top: .75rem solid red;
+  border-top: .75rem solid black;
+  /* border-radius: .25rem; */
 }
 
-button:disabled {
-  background-color: #EFEFEF;
-  cursor: not-allowed;
-  color: #c0c0c0;
-  /* background-color: #EFEFEF; */
-  background: none;
-}
-
-/*--------------------------RIGHT ASIDE---------------------*/
-.right-aside {
-  height: 100vh;
-  width: 25vw;
-  text-align: center;
-  background-color: yellow;
+.disable {
+  pointer-events: none;
+  cursor: none;
 }
 
 /* ------------------MEDIA QUERIES MIN WIDTH 900px LARGE SCREEN-------------------- */
@@ -111,16 +146,41 @@ button:disabled {
 }
 
 /* ------------------MEDIA QUERIES MAX WIDTH 700px SMALL SCREENS-------------------- */
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 900px) {
 
   main {
     display: flex;
     flex-direction: column;
   }
 
-  .left-aside {
+  .left-aside, 
+  .right-aside {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     height: 25vh;
     width: 100vw;
+  }
+
+  .mini-boards {
+    border: 0.1rem solid black;
+    height: 20vh;
+    width: 62vw;
+    overflow: scroll;
+  }
+
+  .mini-game-board {
+    height: 11vh;
+    width: 19vw;
+  }
+
+  .mini-game-tile {
+    height: 3vh;
+    /* width: 2vw; */
+    /* margin: 0; */
+    margin-right: 3px;
+    padding: 0;
+    font-size: 20px;
   }
 
   .middle-area {
@@ -130,7 +190,7 @@ button:disabled {
 
   .game-board {
     height: 15rem;
-    width: 18rem;
+    width: 21rem;
   }
   
   .game-tile {
@@ -141,34 +201,36 @@ button:disabled {
     text-align: center;
   }
 
-  .right-aside {
-    height: 25vh;
-    width: 100vw;
-  }
-
   .player-emoji {
-    /* margin: 0; */
-    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    /* margin-top: 0vh; */
+    /* margin-right: 2vh; */
     font-size: 40px;
   }
   
   .wins-text,
   .grid-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0;
     font-size: 40px;
   }
 
   .top-border {
-    border-bottom: .25rem solid red;
+    border-bottom: .25rem solid black;
   }
   
   .middle-border {
-    border-left: .25rem solid red;
-    border-right: .25rem solid red;
+    border-left: .25rem solid black;
+    border-right: .25rem solid black;
   }
   
   .bottom-border {
-    border-top: .25rem solid red;
+    border-top: .25rem solid black;
   }
 
 }
