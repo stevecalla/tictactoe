@@ -62,13 +62,13 @@ function createMiniWinBoards(winner) {
       `          
         <div class="mini-game-board" id="miniGameBoard">
           <article class='mini-game-tile' id='zero'>${currentGame[winner].historicalWins[i].zero}</article>
-          <article class='mini-game-tile' id='one'>${currentGame[winner].historicalWins[i].one}</article>
-          <article class='mini-game-tile' id='two'>${currentGame[winner].historicalWins[i].two}</article>
           <article class='mini-game-tile' id='three'>${currentGame[winner].historicalWins[i].three}</article>
-          <article class='mini-game-tile' id='four'>${currentGame[winner].historicalWins[i].four}</article>
-          <article class='mini-game-tile' id='five'>${currentGame[winner].historicalWins[i].five}</article>
           <article class='mini-game-tile' id='six'>${currentGame[winner].historicalWins[i].six}</article>
+          <article class='mini-game-tile' id='one'>${currentGame[winner].historicalWins[i].one}</article>
+          <article class='mini-game-tile' id='four'>${currentGame[winner].historicalWins[i].four}</article>
           <article class='mini-game-tile' id='seven'>${currentGame[winner].historicalWins[i].seven}</article>
+          <article class='mini-game-tile' id='two'>${currentGame[winner].historicalWins[i].two}</article>
+          <article class='mini-game-tile' id='five'>${currentGame[winner].historicalWins[i].five}</article>
           <article class='mini-game-tile' id='eight'>${currentGame[winner].historicalWins[i].eight}</article>
         </div>
         `;
@@ -83,3 +83,13 @@ function renderMiniWinCards(winner, miniCards) {
     miniGameBoardsPlayer2.innerHTML = miniCards;
   }
 }
+
+id='zero'
+id='three'
+d='six'
+id='one'
+id='four'
+id='seven'
+id='two'
+id='five'
+id='eight'
