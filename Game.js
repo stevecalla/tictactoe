@@ -28,35 +28,33 @@ class Game {
   }
 
   setWinningScore(player, game) {
-    var winner;
     var winningScore = 3;
     if (player === 'player2') {
       var winningScore = 15;
     } 
-    this.setWinnngCombinations(player, game, winner, winningScore)
+    this.setWinnngCombinations(player, game, winningScore)
   }
 
-  setWinnngCombinations(player, game, winner, winningScore) {
+  setWinnngCombinations(player, game, winningScore) {
     var winningCombos = [['zero', 'one', 'two'], ['three', 'four', 'five'], ['six', 'seven', 'eight'], 
                          ['zero', 'three', 'six'], ['one', 'four', 'seven'], ['two', 'five', 'eight'],
                          ['zero', 'four', 'eight'], ['two', 'four', 'six']];
-    this.determineWinner(player, game, winner, winningScore, winningCombos);
+    this.determineWinner(player, game, winningScore, winningCombos);
   }
 
-  determineWinner(player, game, winner, winningScore, winningCombos) {
+  determineWinner(player, game, winningScore, winningCombos) {
     for (var i = 0; i < winningCombos.length; i++) {
       if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
           this.currentBoard[winningCombos[i][2]] === winningScore) {
         this.winner = player;
-        winner = this.winner;
       }
     }
     this.winCounter();
     this.checkForGameDraw(game, this.winner);
-    this.convertWinBoardToEmojis(winner, this.currentBoard);
-    this.disableAllButtons(winner);
+    this.convertWinBoardToEmojis(this.winner, this.currentBoard);
+    this.disableAllButtons(this.winner);
     this.resetWinnerAndCurrentBoard();
-    this.restartGame(winner, this.currentPlayer);
+    this.restartGame(this.winner, this.currentPlayer);
   }
 
   convertWinBoardToEmojis(winner, board) {
@@ -69,19 +67,20 @@ class Game {
         emojiBoard[boardKeys[i]] = this.player1.token;
       }
     }
-    this.winHistory(winner, emojiBoard);
+    this.winHistory(emojiBoard);
   }
 
-  winHistory(winner, emojiBoard) {
+  winHistory(emojiBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalWins.unshift(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
-      createMiniWinBoards(winner);
+      createMiniWinBoards(this.winner);
     }
   }
 
-  disableAllButtons(winner) { //put in mainjs?
-    if (winner === 'player1' || winner === 'player2') {
+  disableAllButtons() { //put in mainjs?
+    //TODO: adjust boolean?
+    if (this.winner === 'player1' || this.winner === 'player2') {
       for (var i = 0; i < gameTile.length; i++) {
         gameTile[i].classList.add('disable');
       }
@@ -94,11 +93,9 @@ class Game {
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
         console.log('draw');
         this.winner = 'draw';
-        winner = this.winner //can't use this in the restart timeout function
         renderDrawMessage() 
       }
-      // this.resetWinnerAndCurrentBoard();
-      this.restartGame(winner);
+      this.restartGame(this.winner);
   }
 
   winCounter() {
@@ -113,7 +110,6 @@ class Game {
   resetWinnerAndCurrentBoard() {
     if (this.winner) {
       this.winner = undefined;
-      // this.createBoard();
       this.currentBoard = {zero: 0, one: 0, two: 0, 
         three: 0, four: 0, five: 0, 
         six: 0, seven: 0, eight: 0};

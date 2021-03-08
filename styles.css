@@ -164,7 +164,7 @@ main {
   }
 
   .mini-boards {
-    border: 0.1rem solid black;
+    border: 0.1rem solid white;
     height: 20vh;
     width: 62vw;
     overflow: scroll;
