@@ -4,13 +4,16 @@ class Game {
     this.player2 = new Player(5);
     this.currentPlayer = player || 'player2';
     this.winner = undefined;
+    this.currentBoard = {zero: 0, one: 0, two: 0, 
+      three: 0, four: 0, five: 0, 
+      six: 0, seven: 0, eight: 0};
   }
 
-  createBoard() {
-    this.currentBoard = {zero: 0, one: 0, two: 0, 
-                        three: 0, four: 0, five: 0, 
-                        six: 0, seven: 0, eight: 0};
-  }
+  // createBoard() {
+  //   this.currentBoard = {zero: 0, one: 0, two: 0, 
+  //                       three: 0, four: 0, five: 0, 
+  //                       six: 0, seven: 0, eight: 0};
+  // }
 
   playerTurn(event, targetKey, game) {
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
@@ -77,7 +80,7 @@ class Game {
 
   winHistory(winner, emojiBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
-      this[this.winner].historicalWins.push(emojiBoard);
+      this[this.winner].historicalWins.unshift(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
       createMiniWinBoards(winner);
     }
@@ -117,7 +120,10 @@ class Game {
   resetWinnerAndCurrentBoard() {
     if (this.winner) {
       this.winner = undefined;
-      this.createBoard();
+      // this.createBoard();
+      this.currentBoard = {zero: 0, one: 0, two: 0, 
+        three: 0, four: 0, five: 0, 
+        six: 0, seven: 0, eight: 0};
     }
   }
   

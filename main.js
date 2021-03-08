@@ -17,7 +17,7 @@ gameBoard.addEventListener('click', playGame);
 function startGame() {
   // var currentGame;
   currentGame = new Game('player2');
-  currentGame.createBoard();
+  // currentGame.createBoard();
   currentGame.player1.token = '🥵'; 
   currentGame.player2.token = '🥶';
   currentGame.player1.getWinsFromLocalStorage();
