@@ -17,10 +17,10 @@ class Game {
 
   playerTurn(event, targetKey, game) {
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer);
+      renderNextTurnMessage(this.currentPlayer, 0);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer);
+      renderNextTurnMessage(this.currentPlayer, 0);
       this.currentPlayer = 'player2';
     }
     this.updateGameTracker(this.currentPlayer, targetKey, game, event);
@@ -102,7 +102,7 @@ class Game {
         console.log('draw');
         this.winner = 'draw';
         winner = this.winner //can't use this in the restart timeout function
-        nextTurnMessage.innerText = `It's a draw!`;//move to mainjs
+        renderDrawMessage() 
       }
       // this.resetWinnerAndCurrentBoard();
       this.restartGame(winner);
@@ -112,7 +112,7 @@ class Game {
     if (this.winner) {
       this[this.winner].wins ++;
       renderWinScore(this[this.winner].wins, this.winner);
-      nextTurnMessage.innerText = `${this[this.winner].token} won!`;//move to mainjs
+      renderWinMessage(this.winner);
       console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
     }
   }

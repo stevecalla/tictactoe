@@ -40,6 +40,14 @@ function renderNextTurnMessage(player) {
   nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
 }
 
+function renderDrawMessage() {
+  nextTurnMessage.innerText = `It's a draw!`;
+}
+
+function renderWinMessage(winner) {
+  nextTurnMessage.innerText = `${this.currentGame[winner].token} won!`;
+}
+
 function renderWinScore(wins, winner) {
   //can i just display wins? rather than this.current....?
   if (wins !== 1 && winner === 'player1') {
