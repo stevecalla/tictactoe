@@ -18,8 +18,8 @@ function startGame() {
   // var currentGame;
   currentGame = new Game('player2');
   currentGame.createBoard();
-  currentGame.player1.token = '✖️'; 
-  currentGame.player2.token = '⭕';
+  currentGame.player1.token = '🥵'; 
+  currentGame.player2.token = '🥶';
   currentGame.player1.getWinsFromLocalStorage();
 }
 
@@ -83,13 +83,3 @@ function renderMiniWinCards(winner, miniCards) {
     miniGameBoardsPlayer2.innerHTML = miniCards;
   }
 }
-
-id='zero'
-id='three'
-d='six'
-id='one'
-id='four'
-id='seven'
-id='two'
-id='five'
-id='eight'
