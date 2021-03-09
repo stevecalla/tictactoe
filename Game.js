@@ -55,7 +55,10 @@ class Game {
   endGameActions(winner) {
     this.winCounter();
     this.checkForGameDraw();
-    convertWinBoardToRenderEmojis(this.currentBoard);
+    
+    this.winHistory(this.currentBoard); //TODO:
+    convertWinBoardToRenderEmojis(this.currentBoard); //TODO:
+
     disableAllTilePointerEvents(this.winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(winner);
@@ -80,9 +83,16 @@ class Game {
       this.restartGame(this.winner);
   }
 
-  winHistory(emojiBoard) {
+  winHistory(winBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
-      this[this.winner].historicalWins.unshift(emojiBoard);
+      this[this.winner].historicalWins.unshift(winBoard);
+      this[this.winner].saveWinsToLocalStorage();
+    }
+  }
+
+  emojiHistory(emojiBoard) {
+    if (this.winner === 'player1' || this.winner === 'player2') {
+      this[this.winner].historicalEmojis.unshift(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
       createMiniWinBoards(this.winner);
     }

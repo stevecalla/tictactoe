@@ -48,6 +48,10 @@ function renderNextTurnMessageOnLoad() {
 function getFromLocalStorage() {
   currentGame.player1.getWinsFromLocalStorage('player1', '1');
   currentGame.player2.getWinsFromLocalStorage('player2', '5');
+
+  // TODO:
+  currentGame.player1.getEmojisFromLocalStorage('player1', 'a');
+  currentGame.player2.getEmojisFromLocalStorage('player2', 'b');
 }
 
 function playGame(event) {
@@ -101,29 +105,30 @@ function convertWinBoardToRenderEmojis(board) {
       emojiBoard[boardKeys[i]] = currentGame.player1.token;
     }
   }
-  currentGame.winHistory(emojiBoard);
+  currentGame.emojiHistory(emojiBoard);
 }
 
 function createMiniWinBoards(winner) {
   var createMiniBoardCards = '';
-  for (var i = 0; i < currentGame[winner].historicalWins.length; i++) {
+  for (var i = 0; i < currentGame[winner].historicalEmojis.length; i++) {
     createMiniBoardCards += 
       `          
         <div class="mini-game-board" id="miniGameBoard">
-          <article class='mini-game-tile' id='zero'>${currentGame[winner].historicalWins[i].zero}</article>
-          <article class='mini-game-tile' id='three'>${currentGame[winner].historicalWins[i].three}</article>
-          <article class='mini-game-tile' id='six'>${currentGame[winner].historicalWins[i].six}</article>
-          <article class='mini-game-tile' id='one'>${currentGame[winner].historicalWins[i].one}</article>
-          <article class='mini-game-tile' id='four'>${currentGame[winner].historicalWins[i].four}</article>
-          <article class='mini-game-tile' id='seven'>${currentGame[winner].historicalWins[i].seven}</article>
-          <article class='mini-game-tile' id='two'>${currentGame[winner].historicalWins[i].two}</article>
-          <article class='mini-game-tile' id='five'>${currentGame[winner].historicalWins[i].five}</article>
-          <article class='mini-game-tile' id='eight'>${currentGame[winner].historicalWins[i].eight}</article>
+          <article class='mini-game-tile' id='zero'>${currentGame[winner].historicalEmojis[i].zero}</article>
+          <article class='mini-game-tile' id='three'>${currentGame[winner].historicalEmojis[i].three}</article>
+          <article class='mini-game-tile' id='six'>${currentGame[winner].historicalEmojis[i].six}</article>
+          <article class='mini-game-tile' id='one'>${currentGame[winner].historicalEmojis[i].one}</article>
+          <article class='mini-game-tile' id='four'>${currentGame[winner].historicalEmojis[i].four}</article>
+          <article class='mini-game-tile' id='seven'>${currentGame[winner].historicalEmojis[i].seven}</article>
+          <article class='mini-game-tile' id='two'>${currentGame[winner].historicalEmojis[i].two}</article>
+          <article class='mini-game-tile' id='five'>${currentGame[winner].historicalEmojis[i].five}</article>
+          <article class='mini-game-tile' id='eight'>${currentGame[winner].historicalEmojis[i].eight}</article>
         </div>
         `;
   }
   renderMiniWinCards(winner, createMiniBoardCards);
 }
+
 
 function renderMiniWinCards(winner, miniCards) {
   if (winner === 'player1') {
