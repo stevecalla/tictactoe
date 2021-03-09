@@ -2,7 +2,7 @@ class Game {
   constructor(player) {
     this.player1 = new Player(1);
     this.player2 = new Player(5);
-    this.currentPlayer = player || 'player2'; //REFACTOR START W/ PLAYER1 TODO:
+    this.currentPlayer = player || 'player2';
     this.winner = undefined;
     this.currentBoard = {zero: 0, one: 0, two: 0, 
       three: 0, four: 0, five: 0, 
@@ -42,38 +42,41 @@ class Game {
     this.determineWinner(winningScore, winningCombos);
   }
 
-  determineWinner(winningScore, winningCombos) { //TODO:
+  determineWinner(winningScore, winningCombos) {
     for (var i = 0; i < winningCombos.length; i++) {
       if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
           this.currentBoard[winningCombos[i][2]] === winningScore) {
         this.winner = this.currentPlayer;
       }
     }
-    this.winCounter(); //MOVE TO ANOTHER FUNCTION TODO:
-    this.checkForGameDraw(this.winner);
+    this.winGameActions(this.winner);
+  }
+  
+  winGameActions(winner) {
+    this.winCounter();
+    this.checkForGameDraw();
     convertWinBoardToEmojis(this.currentBoard);
     disableAllTilePointerEvents(this.winner);
     this.resetWinnerAndCurrentBoard();
-    this.restartGame(this.winner, this.currentPlayer);
+    this.restartGame(winner);
   }
 
-  winHistory(emojiBoard) { //WHERE IS WIN HISTORY BEING CALLED TODO:
-    if (this.winner) {
+  winHistory(emojiBoard) {
+    if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalWins.unshift(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
       createMiniWinBoards(this.winner);
     }
   }
 
-  checkForGameDraw(winner) { //TODO:
-    if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
+  checkForGameDraw() {
+    if(!this.winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
-        console.log('draw');
         this.winner = 'draw';
         renderDrawMessage() 
       }
-      this.restartGame(this.winner); //DO I NEED THIS.WINNER TODO:
+      this.restartGame(this.winner);
   }
 
   winCounter() {
@@ -85,20 +88,20 @@ class Game {
     }
   }
 
-  resetWinnerAndCurrentBoard() { //TODO:
+  resetWinnerAndCurrentBoard() {
     if (this.winner) {
       this.winner = undefined;
       this.currentBoard = {zero: 0, one: 0, two: 0, 
         three: 0, four: 0, five: 0, 
         six: 0, seven: 0, eight: 0};
-    } //TODO: call new game?
+    }
   }
   
   restartGame(winner) {
     if (this.currentPlayer === 'player1') {
       var nextPlayer = 'player2';
     } else {
-      nextPlayer = 'player1';
+        nextPlayer = 'player1';
     }
     callTimeOut(winner, nextPlayer);
   }

@@ -56,18 +56,17 @@ function renderWinTextOnLoad() {
   playerTwoWins.innerText = `0 win`;
 }
 
-function renderWinScore(wins, winner) { //TODO:
-  //can i just display wins? rather than this.current....?
+function renderWinScore(wins, winner) {
   if (wins !== 1 && winner === 'player1') {
-    playerOneWins.innerText = `${this.currentGame[winner].wins} wins`;
+    playerOneWins.innerText = `${wins} wins`;
   } else if (winner === 'player1') {
-    playerOneWins.innerText = `${this.currentGame[winner].wins} win`;
+    playerOneWins.innerText = `${wins} win`;
   } 
 
   if (wins !== 1 && winner === 'player2') {
-    playerTwoWins.innerText = `${this.currentGame[winner].wins} wins`;
+    playerTwoWins.innerText = `${wins} wins`;
   } else if (winner === 'player2') {
-    playerTwoWins.innerText = `${this.currentGame[winner].wins} win`;
+    playerTwoWins.innerText = `${wins} win`;
   } 
 }
 
