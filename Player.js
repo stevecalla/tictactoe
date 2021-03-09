@@ -17,12 +17,22 @@ class Player {
     for (var i = 0; i < playerIds.length; i++) {
       var retrievedWinHistory = localStorage.getItem(playerIds[i]);
       parsedWinHistory = JSON.parse(retrievedWinHistory);
-      if (parsedWinHistory !== null) {
-        currentGame[players[i]].historicalWins = parsedWinHistory; //BREAKUP FUNCTION TODO:
-        currentGame[players[i]].wins = parsedWinHistory.length;
-        renderWinScore(currentGame[players[i]].wins, players[i]);
-        createMiniWinBoards(players[i]);
-      }
+      this.restoreHistoricalWins(i, players, parsedWinHistory);
+      this.renderHistoricalWins(i, players, parsedWinHistory)
+    }
+  }
+
+  restoreHistoricalWins(i, players, parsedWinHistory) {
+    if (parsedWinHistory !== null) {
+      currentGame[players[i]].historicalWins = parsedWinHistory;
+      currentGame[players[i]].wins = parsedWinHistory.length;
+    }
+  }
+
+  renderHistoricalWins(i, players, parsedWinHistory) {
+    if (parsedWinHistory !== null) {
+      renderWinScore(currentGame[players[i]].wins, players[i]);
+      createMiniWinBoards(players[i]);
     }
   }
 
