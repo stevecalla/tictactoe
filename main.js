@@ -19,9 +19,9 @@ gameBoard.addEventListener('click', playGame);
 //functions below
 function startGame() {
   currentGame = new Game('player2');
-  currentGame.player1.getWinsFromLocalStorage();
   setPlayerEmoji();
   renderWinTextOnLoad();
+  currentGame.player1.getWinsFromLocalStorage();
 }
 
 function playGame(event) {
