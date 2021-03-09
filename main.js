@@ -8,8 +8,8 @@ var renderplayerOneEmoji = document.querySelector('#player1Emoji');
 var renderplayerTwoEmoji = document.querySelector('#player2Emoji');
 // var renderWinsPlayerOne = document.querySelector('#playerOneWins'); //TODO:
 // var renderWinsPlayerTwo = document.querySelector('#playerTwoWins'); //TODO:
-var restartGameButton = document.querySelector('#restartGame');
-var clearWinsButton = document.querySelector('#clearWins');
+var restartGameButton = document.querySelector('#restartGameButton');
+var clearWinsButton = document.querySelector('#clearWinsButton');
 
 // global variables below
 var currentGame;

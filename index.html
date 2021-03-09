@@ -4,6 +4,8 @@
     <title>Tic Tac Toe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./styles.css">
   </head>
@@ -27,8 +29,10 @@
           <article class='game-tile bottom-border middle-border' id='seven'></article>
           <article class='game-tile bottom-border' id='eight'></article>
         </div>   
-        <button class="" id="restartGame">Restart Current Game</button>     
-        <button class="" id="clearWins">Clear Win Score & History</button>  
+        <div class="restart-clear-buttons">
+          <button class="restart-game-button" id="restartGameButton">Restart Game</button>     
+          <button class="clear-wins-button" id="clearWinsButton">Clear Win History</button>  
+        </div>
       </section>
       <section class="right-aside">
         <h2 class='player-emoji' id="player2Emoji"></h2>

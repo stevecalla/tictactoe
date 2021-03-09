@@ -1,6 +1,8 @@
 /*--------------------------BODY---------------------*/
 body {
   margin: 0;
+  /* font-family: 'Open Sans', sans-serif; */
+  font-family: 'Roboto', sans-serif;
   overflow: hidden;
 }
 
@@ -43,7 +45,7 @@ main {
 
 .mini-game-tile {
   height: 4vh;
-  width: 3vw;
+  /* width: 3vw; */
   margin: 0;
   padding: 0;
   font-size: 30px;
@@ -92,9 +94,11 @@ main {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 75vh;
-  width: 45vw;
+  height: 60vh;
+  width: 36vw;
   margin: 0;
+  margin-top: 1vh;
+  margin-bottom: 7vh;
   color: none;
   background-color: white;
 }
@@ -104,7 +108,9 @@ main {
   justify-content: center;
   align-items: center;
   height: 25vh;
-  width: 12vw;
+  width: 11vw;
+  height: 20vh;
+  width: 10vw;
   margin: 0;
   padding: 0;
   font-size: 100px;
@@ -129,6 +135,25 @@ main {
 .disable {
   pointer-events: none;
   cursor: none;
+}
+
+.restart-clear-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.restart-game-button,
+.clear-wins-button {
+  border: none;
+  height: 8vh;
+  width: 12vw;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  background-color: black;
+  border-radius: 10px;
 }
 
 /* ------------------MEDIA QUERIES MIN WIDTH 900px LARGE SCREEN-------------------- */
@@ -177,6 +202,7 @@ main {
 
   .mini-game-tile {
     height: 3vh;
+    /* width: 0vw; */
     margin-right: 3px;
     font-size: 20px;
   }
@@ -189,6 +215,8 @@ main {
   .game-board {
     height: 15rem;
     width: 21rem;
+    margin-top: .0vh;
+    margin-bottom: .5vh;
   }
   
   .game-tile {
@@ -227,6 +255,26 @@ main {
   
   .bottom-border {
     border-top: .25rem solid black;
+  }
+
+  .restart-clear-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .restart-game-button,
+  .clear-wins-button {
+    border: none;
+    height: 8vh;
+    width: 25vw;
+    margin: 1vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bolder;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
   }
 
 }
