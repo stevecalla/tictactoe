@@ -1,9 +1,7 @@
-/* * {
-  border: 1px solid red;
-} */
 /*--------------------------BODY---------------------*/
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 /*--------------------------MAIN---------------------*/
@@ -39,9 +37,8 @@ main {
 .mini-boards-player2 {
   display: flex;
   flex-wrap: wrap;
-  height: 65vh;
   width: 25vw;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .mini-game-tile {
@@ -53,7 +50,6 @@ main {
   text-align: center;
   background: none;
   outline: none;
-  /* overflow: scroll; */
 }
 /*--------------------------TEXT FORMATING---------------------*/
 
@@ -71,6 +67,7 @@ main {
   margin: 0;
   margin-bottom: 2vh;
   font-size: 70px;
+  font-weight: lighter;
   color: black;
   text-align: center;
 }
@@ -118,18 +115,15 @@ main {
 
 .top-border {
   border-bottom: .75rem solid black;
-  /* border-radius: .25rem; */
 }
 
 .middle-border {
   border-left: .75rem solid black;
   border-right: .75rem solid black;
-  /* border-radius: .25rem; */
 }
 
 .bottom-border {
   border-top: .75rem solid black;
-  /* border-radius: .25rem; */
 }
 
 .disable {
@@ -163,23 +157,27 @@ main {
   }
 
   .mini-boards {
-    border: 0.1rem solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 0.1rem solid white;
     height: 20vh;
-    width: 62vw;
-    overflow: scroll;
+    width: 66vw;
+    margin: 2vw;
+    overflow: auto;
   }
 
   .mini-game-board {
+    display: flex;
+    justify-content: unset;
     height: 11vh;
-    width: 19vw;
+    width: 18vw;
+    margin: 5px;
   }
 
   .mini-game-tile {
     height: 3vh;
-    /* width: 2vw; */
-    /* margin: 0; */
     margin-right: 3px;
-    padding: 0;
     font-size: 20px;
   }
 
@@ -206,8 +204,6 @@ main {
     justify-content: center;
     align-items: center;
     margin: 0;
-    /* margin-top: 0vh; */
-    /* margin-right: 2vh; */
     font-size: 40px;
   }
   

@@ -18,7 +18,7 @@ class Player {
       var retrievedWinHistory = localStorage.getItem(playerIds[i]);
       parsedWinHistory = JSON.parse(retrievedWinHistory);
       if (parsedWinHistory !== null) {
-        currentGame[players[i]].historicalWins = parsedWinHistory;
+        currentGame[players[i]].historicalWins = parsedWinHistory; //BREAKUP FUNCTION TODO:
         currentGame[players[i]].wins = parsedWinHistory.length;
         renderWinScore(currentGame[players[i]].wins, players[i]);
         createMiniWinBoards(players[i]);

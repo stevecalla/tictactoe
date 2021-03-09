@@ -4,112 +4,86 @@ class Game {
     this.player2 = new Player(5);
     this.currentPlayer = player || 'player2';
     this.winner = undefined;
-  }
-
-  createBoard() {
     this.currentBoard = {zero: 0, one: 0, two: 0, 
-                        three: 0, four: 0, five: 0, 
-                        six: 0, seven: 0, eight: 0};
+      three: 0, four: 0, five: 0, 
+      six: 0, seven: 0, eight: 0};
   }
 
-  playerTurn(event, targetKey, game) {
+
+  assignPlayerTurn(event, targetKey) {
     if (this.currentPlayer === 'player2' && event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer);
+      renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer);
-      this.currentPlayer = 'player2';
+        renderNextTurnMessage(this.currentPlayer, targetKey); //MOVE TO DIFFERENT FUNCTION TODO:playerTwoWins
+        this.currentPlayer = 'player2';
     }
-    this.updateGameTracker(this.currentPlayer, targetKey, game, event);
+    this.updateGameTracker(targetKey, event);
   }
 
-  updateGameTracker(player, targetKey, game, event) {
-    this.currentBoard[targetKey] = this[player].id;
-    renderTokenToBoard(player, this.currentBoard, targetKey, event);
-    // this.determineWinner(player, game);
-    this.setWinningScore(player, game);
+  updateGameTracker(targetKey, event) {
+    this.currentBoard[targetKey] = this[this.currentPlayer].id;
+    renderTokenToBoard(this.currentPlayer, targetKey, event);
+    this.setWinningScore();
   }
 
-  setWinningScore(player, game) {
-    var winner;
+  setWinningScore() {
     var winningScore = 3;
-    if (player === 'player2') {
+    if (this.currentPlayer === 'player2') {
       var winningScore = 15;
     } 
-    this.setWinnngCombinations(player, game, winner, winningScore)
+    this.setWinnngCombinations(winningScore)
   }
 
-  setWinnngCombinations(player, game, winner, winningScore) {
+  setWinnngCombinations(winningScore) {
     var winningCombos = [['zero', 'one', 'two'], ['three', 'four', 'five'], ['six', 'seven', 'eight'], 
                          ['zero', 'three', 'six'], ['one', 'four', 'seven'], ['two', 'five', 'eight'],
                          ['zero', 'four', 'eight'], ['two', 'four', 'six']];
-    this.determineWinner(player, game, winner, winningScore, winningCombos);
+    this.determineWinner(winningScore, winningCombos);
   }
 
-  determineWinner(player, game, winner, winningScore, winningCombos) {
+  determineWinner(winningScore, winningCombos) {
     for (var i = 0; i < winningCombos.length; i++) {
       if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
           this.currentBoard[winningCombos[i][2]] === winningScore) {
-        this.winner = player;
-        winner = this.winner;
+        this.winner = this.currentPlayer;
       }
     }
+    this.winGameActions(this.winner);
+  }
+  
+  winGameActions(winner) {
     this.winCounter();
-    this.checkForGameDraw(game, this.winner);
-    this.convertWinBoardToEmojis(winner, this.currentBoard);
-    this.disableAllButtons(winner);
+    this.checkForGameDraw();
+    convertWinBoardToEmojis(this.currentBoard);
+    disableAllTilePointerEvents(this.winner);
     this.resetWinnerAndCurrentBoard();
-    this.restartGame(winner, this.currentPlayer);
+    this.restartGame(winner);
   }
 
-  convertWinBoardToEmojis(winner, board) {
-    var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
-    var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-    for (var i = 0; i < boardKeys.length; i++) {
-      if (board[boardKeys[i]] === 5) {
-        emojiBoard[boardKeys[i]] = this.player2.token;
-      } else if (board[boardKeys[i]] === 1) {
-        emojiBoard[boardKeys[i]] = this.player1.token;
-      }
-    }
-    this.winHistory(winner, emojiBoard);
-  }
-
-  winHistory(winner, emojiBoard) {
+  winHistory(emojiBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
-      this[this.winner].historicalWins.push(emojiBoard);
+      this[this.winner].historicalWins.unshift(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
-      createMiniWinBoards(winner);
+      createMiniWinBoards(this.winner);
     }
   }
 
-  disableAllButtons(winner) { //put in mainjs?
-    if (winner === 'player1' || winner === 'player2') {
-      var nodeList = document.querySelectorAll('.game-tile');
-      for (var i = 0; i < nodeList.length; i++) {
-        nodeList[i].classList.add('disable');
-      }
-    }
-  }
-
-  checkForGameDraw(game, winner) {
-    if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
+  checkForGameDraw() {
+    if(!this.winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
-        console.log('draw');
         this.winner = 'draw';
-        winner = this.winner //can't use this in the restart timeout function
-        nextTurnMessage.innerText = `It's a draw!`;//move to mainjs
+        renderDrawMessage() 
       }
-      // this.resetWinnerAndCurrentBoard();
-      this.restartGame(winner);
+      this.restartGame(this.winner);
   }
 
   winCounter() {
     if (this.winner) {
       this[this.winner].wins ++;
       renderWinScore(this[this.winner].wins, this.winner);
-      nextTurnMessage.innerText = `${this[this.winner].token} won!`;//move to mainjs
+      renderWinMessage(this.winner);
       console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
     }
   }
@@ -117,7 +91,9 @@ class Game {
   resetWinnerAndCurrentBoard() {
     if (this.winner) {
       this.winner = undefined;
-      this.createBoard();
+      this.currentBoard = {zero: 0, one: 0, two: 0, 
+        three: 0, four: 0, five: 0, 
+        six: 0, seven: 0, eight: 0};
     }
   }
   
@@ -125,19 +101,9 @@ class Game {
     if (this.currentPlayer === 'player1') {
       var nextPlayer = 'player2';
     } else {
-      nextPlayer = 'player1';
+        nextPlayer = 'player1';
     }
-
-    setTimeout( function() { //can't breakup b/f of issue w/ this
-    if (winner) {
-      renderNextTurnMessage(nextPlayer);
-      var nodeList = document.querySelectorAll('.game-tile');
-      for (var i = 0; i < nodeList.length; i++) {
-        nodeList[i].innerText = "";     //clear dom
-        nodeList[i].classList.remove('disable');
-        }
-      }
-    }, 2000);
+    callTimeOut(winner, nextPlayer);
   }
 
 }

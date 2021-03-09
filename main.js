@@ -1,10 +1,13 @@
 // variables for querySelectors below
 var gameBoard = document.querySelector('#gameBoard');
-var nextTurnMessage = document.querySelector('#turnMessage');
-var renderWinsPlayerOne = document.querySelector('#playerOneWins');
-var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
+var gameTile = document.querySelectorAll('.game-tile');
 var miniGameBoardsPlayer1 = document.querySelector('.mini-boards-player1');
 var miniGameBoardsPlayer2 = document.querySelector('.mini-boards-player2');
+var nextTurnMessage = document.querySelector('#turnMessage');
+var renderplayerOneEmoji = document.querySelector('#player1Emoji');
+var renderplayerTwoEmoji = document.querySelector('#player2Emoji');
+var renderWinsPlayerOne = document.querySelector('#playerOneWins');
+var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
 
 // global variables below
 var currentGame;
@@ -15,44 +18,69 @@ gameBoard.addEventListener('click', playGame);
 
 //functions below
 function startGame() {
-  // var currentGame;
   currentGame = new Game('player2');
-  currentGame.createBoard();
-  currentGame.player1.token = '🥵'; 
-  currentGame.player2.token = '🥶';
+  setPlayerEmoji();
+  renderWinTextOnLoad();
   currentGame.player1.getWinsFromLocalStorage();
 }
 
 function playGame(event) {
   event.preventDefault();
   var targetKey = event.target.id;
-  currentGame.playerTurn(event, targetKey, currentGame)
+  currentGame.assignPlayerTurn(event, targetKey)
 }
 
-function renderTokenToBoard(player, game, targetKey, event) {
+function renderTokenToBoard(player, targetKey, event) {
   if (targetKey !== 'gameBoard') {
     event.target.innerText = currentGame[player].token;
-    event.target.classList.add('disable');
+    disableSingleTilePointerEvent(event) 
   }
 }
 
-function renderNextTurnMessage(player) {
-  nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
+function renderNextTurnMessage(player, targetKey) {
+  if (targetKey !== 'gameBoard') {
+    nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
+  }
+}
+
+function renderDrawMessage() {
+  nextTurnMessage.innerText = `It's a draw!`;
+}
+
+function renderWinMessage(winner) {
+  nextTurnMessage.innerText = `${this.currentGame[winner].token} won!`;
+}
+
+function renderWinTextOnLoad() {
+  playerOneWins.innerText = `0 win`;
+  playerTwoWins.innerText = `0 win`;
 }
 
 function renderWinScore(wins, winner) {
-  //can i just display wins? rather than this.current....?
   if (wins !== 1 && winner === 'player1') {
-    playerOneWins.innerText = `${this.currentGame[winner].wins} wins`;
+    playerOneWins.innerText = `${wins} wins`;
   } else if (winner === 'player1') {
-    playerOneWins.innerText = `${this.currentGame[winner].wins} win`;
-  }
+    playerOneWins.innerText = `${wins} win`;
+  } 
 
   if (wins !== 1 && winner === 'player2') {
-    playerTwoWins.innerText = `${this.currentGame[winner].wins} wins`;
+    playerTwoWins.innerText = `${wins} wins`;
   } else if (winner === 'player2') {
-    playerTwoWins.innerText = `${this.currentGame[winner].wins} win`;
+    playerTwoWins.innerText = `${wins} win`;
+  } 
+}
+
+function convertWinBoardToEmojis(board) {
+  var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
+  var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+  for (var i = 0; i < boardKeys.length; i++) {
+    if (board[boardKeys[i]] === 5) {
+      emojiBoard[boardKeys[i]] = currentGame.player2.token;
+    } else if (board[boardKeys[i]] === 1) {
+      emojiBoard[boardKeys[i]] = currentGame.player1.token;
+    }
   }
+  currentGame.winHistory(emojiBoard);
 }
 
 function createMiniWinBoards(winner) {
@@ -80,6 +108,47 @@ function renderMiniWinCards(winner, miniCards) {
   if (winner === 'player1') {
     miniGameBoardsPlayer1.innerHTML = miniCards;
   } else if (winner === 'player2') {
-    miniGameBoardsPlayer2.innerHTML = miniCards;
+      miniGameBoardsPlayer2.innerHTML = miniCards;
   }
+}
+
+function callTimeOut(winner, nextPlayer) {
+  setTimeout( function() {
+    if (winner) {
+      renderNextTurnMessage(nextPlayer);
+      clearEachTile();
+      enableAllTilePointerEvents();
+    }
+  }, 2000);
+}
+
+function enableAllTilePointerEvents() {
+  for (var i = 0; i < gameTile.length; i++) {
+    gameTile[i].classList.remove('disable');
+    }
+}
+
+function disableAllTilePointerEvents(winner) {
+  if (winner) {
+    for (var i = 0; i < gameTile.length; i++) {
+      gameTile[i].classList.add('disable');
+    }
+  }
+}
+
+function disableSingleTilePointerEvent(event) {
+  event.target.classList.add('disable');
+}
+
+function clearEachTile() {
+  for (var i = 0; i < gameTile.length; i++) {
+    gameTile[i].innerText = "";
+    }
+}
+
+function setPlayerEmoji() {
+  currentGame.player1.token = '🥵';
+  currentGame.player2.token = '🥶';
+  renderplayerOneEmoji.innerText = currentGame.player1.token;
+  renderplayerTwoEmoji.innerText = currentGame.player2.token;
 }
