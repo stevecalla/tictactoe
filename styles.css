@@ -159,13 +159,17 @@ main {
   .mini-boards {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     border: 0.1rem solid white;
     height: 20vh;
-    width: 63vw;
+    width: 66vw;
+    margin: 2vw;
     overflow: auto;
   }
 
   .mini-game-board {
+    display: flex;
+    justify-content: unset;
     height: 11vh;
     width: 18vw;
     margin: 5px;
