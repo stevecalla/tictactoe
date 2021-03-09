@@ -29,6 +29,22 @@ function startGame() {
   getFromLocalStorage();
 }
 
+function setPlayerEmoji() {
+  currentGame.player1.token = '🥵';
+  currentGame.player2.token = '🥶';
+  renderplayerOneEmoji.innerText = currentGame.player1.token;
+  renderplayerTwoEmoji.innerText = currentGame.player2.token;
+}
+
+function renderWinTextOnLoad() {
+  renderWinsPlayerOne.innerText = `0 win`;
+  renderWinsPlayerTwo.innerText = `0 win`;
+}
+
+function renderNextTurnMessageOnLoad() {
+  nextTurnMessage.innerText = `It\'s ${currentGame.player1.token}\'s turn!`;
+}
+
 function getFromLocalStorage() {
   currentGame.player1.getWinsFromLocalStorage('player1', '1');
   currentGame.player2.getWinsFromLocalStorage('player2', '5');
@@ -47,27 +63,14 @@ function renderTokenToBoard(player, targetKey, event) {
   }
 }
 
-function renderNextTurnMessageOnLoad() {
-  nextTurnMessage.innerText = `It\'s ${currentGame.player1.token}\'s turn!`;
-}
-
 function renderNextTurnMessage(player, targetKey) {
   if (targetKey !== 'gameBoard') {
     nextTurnMessage.innerText = `It\'s ${currentGame[player].token}\'s turn!`;
   }
 }
 
-function renderDrawMessage() {
-  nextTurnMessage.innerText = `It's a draw!`;
-}
-
 function renderWinMessage(winner) {
   nextTurnMessage.innerText = `${this.currentGame[winner].token} won!`;
-}
-
-function renderWinTextOnLoad() {
-  renderWinsPlayerOne.innerText = `0 win`;
-  renderWinsPlayerTwo.innerText = `0 win`;
 }
 
 function renderWinScore(wins, winner) {
@@ -84,7 +87,11 @@ function renderWinScore(wins, winner) {
   } 
 }
 
-function convertWinBoardToEmojis(board) {
+function renderDrawMessage() {
+  nextTurnMessage.innerText = `It's a draw!`;
+}
+
+function convertWinBoardToRenderEmojis(board) {
   var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
   var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
   for (var i = 0; i < boardKeys.length; i++) {
@@ -137,14 +144,14 @@ function clearWins() {
   startGame();
 }
 
-function callTimeOut(winner, nextPlayer) {
+function startNewGameOnDelay(winner, nextPlayer) {
   setTimeout( function() {
     if (winner) {
       renderNextTurnMessage(nextPlayer);
       clearEachTile();
       enableAllTilePointerEvents();
     }
-  }, 2000);
+  }, 3000);
 }
 
 function enableAllTilePointerEvents() {
@@ -169,11 +176,4 @@ function clearEachTile() {
   for (var i = 0; i < gameTile.length; i++) {
     gameTile[i].innerText = "";
     }
-}
-
-function setPlayerEmoji() {
-  currentGame.player1.token = '🥵';
-  currentGame.player2.token = '🥶';
-  renderplayerOneEmoji.innerText = currentGame.player1.token;
-  renderplayerTwoEmoji.innerText = currentGame.player2.token;
 }

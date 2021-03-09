@@ -1,7 +1,6 @@
 /*--------------------------BODY---------------------*/
 body {
   margin: 0;
-  /* font-family: 'Open Sans', sans-serif; */
   font-family: 'Roboto', sans-serif;
   overflow: hidden;
 }
@@ -45,7 +44,6 @@ main {
 
 .mini-game-tile {
   height: 4vh;
-  /* width: 3vw; */
   margin: 0;
   padding: 0;
   font-size: 30px;
@@ -156,21 +154,16 @@ main {
   border-radius: 10px;
 }
 
-/* ------------------MEDIA QUERIES MIN WIDTH 900px LARGE SCREEN-------------------- */
-@media screen and (min-width: 900px) {
-}
-
-/* ------------------MEDIA QUERIES MAX WIDTH 1400px LARGE SCREENS-------------------- */
-@media only screen and (max-width: 1400px) {
-}
-
 /* ------------------MEDIA QUERIES MAX WIDTH 700px SMALL SCREENS-------------------- */
 @media only screen and (max-width: 900px) {
 
+  /*--------------------------MOBILE - MAIN---------------------*/
   main {
     display: flex;
     flex-direction: column;
   }
+
+  /*--------------------------MOBILE - LEFT/RIGHT ASIDE---------------------*/
 
   .left-aside, 
   .right-aside {
@@ -206,6 +199,27 @@ main {
     margin-right: 3px;
     font-size: 20px;
   }
+  
+  /*--------------------------MOBILE - TEXT FORMATING---------------------*/
+
+  .player-emoji {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-size: 40px;
+  }
+  
+  .wins-text,
+  .grid-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-size: 40px;
+  }
+
+  /*--------------------------MOBILE - GAME BOARD SECTION---------------------*/
 
   .middle-area {
     height: 50vh;
@@ -225,23 +239,6 @@ main {
     margin: 0;
     font-size: 50px;
     text-align: center;
-  }
-
-  .player-emoji {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    font-size: 40px;
-  }
-  
-  .wins-text,
-  .grid-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    font-size: 40px;
   }
 
   .top-border {
@@ -265,16 +262,10 @@ main {
 
   .restart-game-button,
   .clear-wins-button {
-    border: none;
     height: 8vh;
     width: 25vw;
     margin: 1vh;
-    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    font-weight: bolder;
-    color: white;
-    background-color: black;
-    border-radius: 10px;
   }
 
 }
