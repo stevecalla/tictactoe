@@ -2,7 +2,7 @@ class Game {
   constructor(player) {
     this.player1 = new Player(1);
     this.player2 = new Player(5);
-    this.currentPlayer = player || 'player2';
+    this.currentPlayer = player;
     this.winner = undefined;
     this.currentBoard = {zero: 0, one: 0, two: 0, 
       three: 0, four: 0, five: 0, 
@@ -15,13 +15,13 @@ class Game {
       renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
-        renderNextTurnMessage(this.currentPlayer, targetKey); //MOVE TO DIFFERENT FUNCTION TODO:playerTwoWins
+        renderNextTurnMessage(this.currentPlayer, targetKey);
         this.currentPlayer = 'player2';
     }
-    this.updateGameTracker(targetKey, event);
+    this.renderPlayerToken(targetKey, event);
   }
 
-  updateGameTracker(targetKey, event) {
+  renderPlayerToken(targetKey, event) {
     this.currentBoard[targetKey] = this[this.currentPlayer].id;
     renderTokenToBoard(this.currentPlayer, targetKey, event);
     this.setWinningScore();
@@ -49,23 +49,25 @@ class Game {
         this.winner = this.currentPlayer;
       }
     }
-    this.winGameActions(this.winner);
+    this.endGameActions(this.winner);
   }
   
-  winGameActions(winner) {
+  endGameActions(winner) {
     this.winCounter();
     this.checkForGameDraw();
-    convertWinBoardToEmojis(this.currentBoard);
+    this.createWinHistory(this.currentBoard);
+    this.convertWinBoardToRenderEmojis(this.currentBoard);
     disableAllTilePointerEvents(this.winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(winner);
   }
 
-  winHistory(emojiBoard) {
-    if (this.winner === 'player1' || this.winner === 'player2') {
-      this[this.winner].historicalWins.unshift(emojiBoard);
-      this[this.winner].saveWinsToLocalStorage();
-      createMiniWinBoards(this.winner);
+  winCounter() {
+    if (this.winner) {
+      this[this.winner].wins ++;
+      renderWinScore(this[this.winner].wins, this.winner);
+      renderWinMessage(this.winner);
+      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins); //TODO:
     }
   }
 
@@ -74,17 +76,36 @@ class Game {
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
         this.winner = 'draw';
-        renderDrawMessage() 
+        renderDrawMessage();
       }
       this.restartGame(this.winner);
   }
 
-  winCounter() {
-    if (this.winner) {
-      this[this.winner].wins ++;
-      renderWinScore(this[this.winner].wins, this.winner);
-      renderWinMessage(this.winner);
-      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
+  createWinHistory(winBoard) {
+    if (this.winner === 'player1' || this.winner === 'player2') {
+      this[this.winner].historicalWins.unshift(winBoard);
+      this[this.winner].saveWinsToLocalStorage();
+    }
+  }
+
+  convertWinBoardToRenderEmojis(board) {
+    var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
+    var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+    for (var i = 0; i < boardKeys.length; i++) {
+      if (board[boardKeys[i]] === 5) {
+        emojiBoard[boardKeys[i]] = currentGame.player2.token;
+      } else if (board[boardKeys[i]] === 1) {
+        emojiBoard[boardKeys[i]] = currentGame.player1.token;
+      }
+    }
+    this.createEmojiHistory(emojiBoard);
+  }
+
+  createEmojiHistory(emojiBoard) {
+    if (this.winner === 'player1' || this.winner === 'player2') {
+      this[this.winner].historicalEmojis.unshift(emojiBoard);
+      this[this.winner].saveEmojisToLocalStorage();
+      createMiniWinBoards(this.winner);
     }
   }
 
@@ -103,7 +124,7 @@ class Game {
     } else {
         nextPlayer = 'player1';
     }
-    callTimeOut(winner, nextPlayer);
+    startNewGameOnDelay(winner, nextPlayer);
   }
 
 }

@@ -4,31 +4,65 @@ class Player {
     this.token = null;
     this.wins = 0;
     this.historicalWins = [];
+    this.historicalEmojis = [];
   }
 
   saveWinsToLocalStorage() {
-    localStorage.setItem(this.id, JSON.stringify(this.historicalWins))
+    localStorage.setItem(this.id, JSON.stringify(this.historicalWins));
   }
 
-  getWinsFromLocalStorage() {
+  getWinsFromLocalStorage(player, id) {
     var parsedWinHistory;
-    var playerIds = [1, 5];
-    var players = ['player1', 'player2'];
-    for (var i = 0; i < playerIds.length; i++) {
-      var retrievedWinHistory = localStorage.getItem(playerIds[i]);
-      parsedWinHistory = JSON.parse(retrievedWinHistory);
-      if (parsedWinHistory !== null) {
-        currentGame[players[i]].historicalWins = parsedWinHistory; //BREAKUP FUNCTION TODO:
-        currentGame[players[i]].wins = parsedWinHistory.length;
-        renderWinScore(currentGame[players[i]].wins, players[i]);
-        createMiniWinBoards(players[i]);
-      }
+    var retrievedWinHistory = localStorage.getItem(id);
+    parsedWinHistory = JSON.parse(retrievedWinHistory);
+    this.restoreHistoricalWins(player, parsedWinHistory);
+    this.renderHistoricalWins(player, parsedWinHistory);
+  }
+
+  restoreHistoricalWins(player, parsedWinHistory) {
+    if (parsedWinHistory !== null) {
+      currentGame[player].historicalWins = parsedWinHistory;
+      currentGame[player].wins = parsedWinHistory.length;
     }
   }
 
-  // maybe button to reset game?
-  // deleteFromLocalStorage() {
-  //   localStorage.clear();
-  // }
+  renderHistoricalWins(player, parsedWinHistory) {
+    if (parsedWinHistory !== null) {
+      renderWinScore(currentGame[player].wins, player);
+    }
+  }
+
+  saveEmojisToLocalStorage() {
+    if (this.id === 1) {
+      localStorage.setItem('a', JSON.stringify(this.historicalEmojis));
+    } else {
+      localStorage.setItem('b', JSON.stringify(this.historicalEmojis));
+    }
+  }
+
+  getEmojisFromLocalStorage(player, id) {
+    var parsedPlayerOneEmojiHistory;
+    var parsedPlayerTwoEmojiHistory;
+    var retrievedPlayerOneEmojiHistory = localStorage.getItem('a');
+    var retrievedPlayerTwoEmojiHistory = localStorage.getItem('b');
+
+    parsedPlayerOneEmojiHistory = JSON.parse(retrievedPlayerOneEmojiHistory);
+    parsedPlayerTwoEmojiHistory = JSON.parse(retrievedPlayerTwoEmojiHistory);
+    this.restoreHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory);
+    this.renderHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory);
+  }
+
+  restoreHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory) {
+    if (parsedPlayerOneEmojiHistory !== null || parsedPlayerTwoEmojiHistory !== null) {
+      currentGame.player1.historicalEmojis = parsedPlayerOneEmojiHistory;
+      currentGame.player2.historicalEmojis = parsedPlayerTwoEmojiHistory;
+    }
+  }
+
+  renderHistoricalEmojis(player, parsedEmojiHistory) {
+    if (parsedEmojiHistory !== null) {
+      createMiniWinBoards(player);
+    }
+  }
 
 }
