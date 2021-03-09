@@ -17,7 +17,7 @@ gameBoard.addEventListener('click', playGame);
 //functions below
 function startGame() {
   currentGame = new Game('player2');
-  currentGame.player1.token = '🥵'; 
+  currentGame.player1.token = '🥵'; //TODO:
   currentGame.player2.token = '🥶';
   currentGame.player1.getWinsFromLocalStorage();
 }
@@ -31,7 +31,7 @@ function playGame(event) {
 function renderTokenToBoard(player, targetKey, event) {
   if (targetKey !== 'gameBoard') {
     event.target.innerText = currentGame[player].token;
-    event.target.classList.add('disable');
+    disableSingleTilePointerEvent(event) 
   }
 }
 
@@ -50,7 +50,7 @@ function renderWinMessage(winner) {
 }
 
 function renderWinScore(wins, winner) {
-  //can i just display wins? rather than this.current....?
+  //can i just display wins? rather than this.current....? TODO:
   if (wins !== 1 && winner === 'player1') {
     playerOneWins.innerText = `${this.currentGame[winner].wins} wins`;
   } else if (winner === 'player1') {
@@ -110,10 +110,32 @@ function callTimeOut(winner, nextPlayer) {
   setTimeout( function() {
   if (winner) {
     renderNextTurnMessage(nextPlayer);
-    for (var i = 0; i < gameTile.length; i++) {
-      gameTile[i].innerText = "";
-      gameTile[i].classList.remove('disable');
-      }
+    clearEachTile();
+    enableAllTilePointerEvents();
     }
   }, 2000);
+}
+
+function enableAllTilePointerEvents() {
+  for (var i = 0; i < gameTile.length; i++) {
+    gameTile[i].classList.remove('disable');
+    }
+}
+
+function disableAllTilePointerEvents(winner) {
+  if (winner) {
+    for (var i = 0; i < gameTile.length; i++) {
+      gameTile[i].classList.add('disable');
+    }
+  }
+}
+
+function disableSingleTilePointerEvent(event) {
+  event.target.classList.add('disable');
+}
+
+function clearEachTile() {
+  for (var i = 0; i < gameTile.length; i++) {
+    gameTile[i].innerText = "";
+    }
 }

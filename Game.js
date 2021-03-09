@@ -2,7 +2,7 @@ class Game {
   constructor(player) {
     this.player1 = new Player(1);
     this.player2 = new Player(5);
-    this.currentPlayer = player || 'player2';
+    this.currentPlayer = player || 'player2'; //REFACTOR START W/ PLAYER1 TODO:
     this.winner = undefined;
     this.currentBoard = {zero: 0, one: 0, two: 0, 
       three: 0, four: 0, five: 0, 
@@ -15,7 +15,7 @@ class Game {
       renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer, targetKey);
+      renderNextTurnMessage(this.currentPlayer, targetKey); //MOVE TO DIFFERENT FUNCTION TODO:
       this.currentPlayer = 'player2';
     }
     this.updateGameTracker(targetKey, event);
@@ -49,29 +49,19 @@ class Game {
         this.winner = this.currentPlayer;
       }
     }
-    this.winCounter();
+    this.winCounter(); //MOVE TO ANOTHER FUNCTION TODO:
     this.checkForGameDraw(this.winner);
     convertWinBoardToEmojis(this.currentBoard);
-    this.disableAllButtons(this.winner);
+    disableAllTilePointerEvents(this.winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(this.winner, this.currentPlayer);
   }
 
-  winHistory(emojiBoard) {
-    //adjust boolean TODO:
-    if (this.winner === 'player1' || this.winner === 'player2') {
+  winHistory(emojiBoard) { //WHERE IS WIN HISTORY BEING CALLED TODO:
+    if (this.winner) {
       this[this.winner].historicalWins.unshift(emojiBoard);
       this[this.winner].saveWinsToLocalStorage();
       createMiniWinBoards(this.winner);
-    }
-  }
-
-  disableAllButtons() { //put in mainjs?
-    //TODO: adjust boolean?
-    if (this.winner === 'player1' || this.winner === 'player2') {
-      for (var i = 0; i < gameTile.length; i++) {
-        gameTile[i].classList.add('disable');
-      }
     }
   }
 
@@ -83,7 +73,7 @@ class Game {
         this.winner = 'draw';
         renderDrawMessage() 
       }
-      this.restartGame(this.winner);
+      this.restartGame(this.winner); //DO I NEED THIS.WINNER TODO:
   }
 
   winCounter() {
@@ -101,7 +91,7 @@ class Game {
       this.currentBoard = {zero: 0, one: 0, two: 0, 
         three: 0, four: 0, five: 0, 
         six: 0, seven: 0, eight: 0};
-    }
+    } //TODO: call new game?
   }
   
   restartGame(winner) {
