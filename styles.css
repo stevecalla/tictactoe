@@ -4,6 +4,7 @@
 /*--------------------------BODY---------------------*/
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 /*--------------------------MAIN---------------------*/
@@ -39,9 +40,9 @@ main {
 .mini-boards-player2 {
   display: flex;
   flex-wrap: wrap;
-  height: 65vh;
+  /* height: 65vh; */
   width: 25vw;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .mini-game-tile {
