@@ -51,27 +51,11 @@ class Game {
     }
     this.winCounter();
     this.checkForGameDraw(this.winner);
-    // this.convertWinBoardToEmojis(this.currentBoard);
-
     convertWinBoardToEmojis(this.currentBoard);
-
     this.disableAllButtons(this.winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(this.winner, this.currentPlayer);
   }
-
-  // convertWinBoardToEmojis(boardfu) {
-  //   var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
-  //   var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-  //   for (var i = 0; i < boardKeys.length; i++) {
-  //     if (board[boardKeys[i]] === 5) {
-  //       emojiBoard[boardKeys[i]] = this.player2.token;
-  //     } else if (board[boardKeys[i]] === 1) {
-  //       emojiBoard[boardKeys[i]] = this.player1.token;
-  //     }
-  //   }
-  //   this.winHistory(emojiBoard);
-  // }
 
   winHistory(emojiBoard) {
     //adjust boolean TODO:
