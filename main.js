@@ -1,4 +1,5 @@
 // variables for querySelectors below
+var clearWinsButton = document.querySelector('#clearWinsButton');
 var gameBoard = document.querySelector('#gameBoard');
 var gameTile = document.querySelectorAll('.game-tile');
 var miniGameBoardsPlayer1 = document.querySelector('.mini-boards-player1');
@@ -6,10 +7,9 @@ var miniGameBoardsPlayer2 = document.querySelector('.mini-boards-player2');
 var nextTurnMessage = document.querySelector('#turnMessage');
 var renderplayerOneEmoji = document.querySelector('#player1Emoji');
 var renderplayerTwoEmoji = document.querySelector('#player2Emoji');
-// var renderWinsPlayerOne = document.querySelector('#playerOneWins'); //TODO:
-// var renderWinsPlayerTwo = document.querySelector('#playerTwoWins'); //TODO:
+var renderWinsPlayerOne = document.querySelector('#playerOneWins');
+var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
 var restartGameButton = document.querySelector('#restartGameButton');
-var clearWinsButton = document.querySelector('#clearWinsButton');
 
 // global variables below
 var currentGame;
@@ -25,7 +25,12 @@ function startGame() {
   currentGame = new Game('player2');
   setPlayerEmoji();
   renderWinTextOnLoad();
-  currentGame.player1.getWinsFromLocalStorage(); //TODO:
+  getFromLocalStorage();
+}
+
+function getFromLocalStorage() {
+  currentGame.player1.getWinsFromLocalStorage('player1', '1');
+  currentGame.player2.getWinsFromLocalStorage('player2', '5');
 }
 
 function playGame(event) {
@@ -56,21 +61,21 @@ function renderWinMessage(winner) {
 }
 
 function renderWinTextOnLoad() {
-  playerOneWins.innerText = `0 win`;
-  playerTwoWins.innerText = `0 win`;
+  renderWinsPlayerOne.innerText = `0 win`;
+  renderWinsPlayerTwo.innerText = `0 win`;
 }
 
 function renderWinScore(wins, winner) {
   if (wins !== 1 && winner === 'player1') {
-    playerOneWins.innerText = `${wins} wins`;
+    renderWinsPlayerOne.innerText = `${wins} wins`;
   } else if (winner === 'player1') {
-    playerOneWins.innerText = `${wins} win`;
+    renderWinsPlayerOne.innerText = `${wins} win`;
   } 
 
   if (wins !== 1 && winner === 'player2') {
-    playerTwoWins.innerText = `${wins} wins`;
+    renderWinsPlayerTwo.innerText = `${wins} wins`;
   } else if (winner === 'player2') {
-    playerTwoWins.innerText = `${wins} win`;
+    renderWinsPlayerTwo.innerText = `${wins} win`;
   } 
 }
 

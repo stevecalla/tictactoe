@@ -10,35 +10,26 @@ class Player {
     localStorage.setItem(this.id, JSON.stringify(this.historicalWins))
   }
 
-  getWinsFromLocalStorage() {
+  getWinsFromLocalStorage(player, id) {
     var parsedWinHistory;
-    var playerIds = [1, 5];
-    var players = ['player1', 'player2'];
-    for (var i = 0; i < playerIds.length; i++) {
-      var retrievedWinHistory = localStorage.getItem(playerIds[i]);
-      parsedWinHistory = JSON.parse(retrievedWinHistory);
-      this.restoreHistoricalWins(i, players, parsedWinHistory);
-      this.renderHistoricalWins(i, players, parsedWinHistory)
-    }
+    var retrievedWinHistory = localStorage.getItem(id);
+    parsedWinHistory = JSON.parse(retrievedWinHistory);
+    this.restoreHistoricalWins(player, parsedWinHistory);
+    this.renderHistoricalWins(player, parsedWinHistory);
   }
 
-  restoreHistoricalWins(i, players, parsedWinHistory) {
+  restoreHistoricalWins(player, parsedWinHistory) {
     if (parsedWinHistory !== null) {
-      currentGame[players[i]].historicalWins = parsedWinHistory;
-      currentGame[players[i]].wins = parsedWinHistory.length;
+      currentGame[player].historicalWins = parsedWinHistory;
+      currentGame[player].wins = parsedWinHistory.length;
     }
   }
 
-  renderHistoricalWins(i, players, parsedWinHistory) {
+  renderHistoricalWins(player, parsedWinHistory) {
     if (parsedWinHistory !== null) {
-      renderWinScore(currentGame[players[i]].wins, players[i]);
-      createMiniWinBoards(players[i]);
+      renderWinScore(currentGame[player].wins, player);
+      createMiniWinBoards(player);
     }
-  }
-
-  // maybe button to reset game?
-  deleteFromLocalStorage() {
-    localStorage.clear();
   }
 
 }
