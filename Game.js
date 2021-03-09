@@ -67,7 +67,6 @@ class Game {
       this[this.winner].wins ++;
       renderWinScore(this[this.winner].wins, this.winner);
       renderWinMessage(this.winner);
-      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins); //TODO:
     }
   }
 
