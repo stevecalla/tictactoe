@@ -1,11 +1,13 @@
 // variables for querySelectors below
 var gameBoard = document.querySelector('#gameBoard');
-var nextTurnMessage = document.querySelector('#turnMessage');
-var renderWinsPlayerOne = document.querySelector('#playerOneWins');
-var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
+var gameTile = document.querySelectorAll('.game-tile');
 var miniGameBoardsPlayer1 = document.querySelector('.mini-boards-player1');
 var miniGameBoardsPlayer2 = document.querySelector('.mini-boards-player2');
-var gameTile = document.querySelectorAll('.game-tile');
+var nextTurnMessage = document.querySelector('#turnMessage');
+var renderplayerOneEmoji = document.querySelector('#player1Emoji');
+var renderplayerTwoEmoji = document.querySelector('#player2Emoji');
+var renderWinsPlayerOne = document.querySelector('#playerOneWins');
+var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
 
 // global variables below
 var currentGame;
@@ -17,9 +19,9 @@ gameBoard.addEventListener('click', playGame);
 //functions below
 function startGame() {
   currentGame = new Game('player2');
-  currentGame.player1.token = '🥵'; //TODO:
-  currentGame.player2.token = '🥶';
   currentGame.player1.getWinsFromLocalStorage();
+  setPlayerEmoji();
+  renderWinTextOnLoad();
 }
 
 function playGame(event) {
@@ -49,19 +51,24 @@ function renderWinMessage(winner) {
   nextTurnMessage.innerText = `${this.currentGame[winner].token} won!`;
 }
 
-function renderWinScore(wins, winner) {
-  //can i just display wins? rather than this.current....? TODO:
+function renderWinTextOnLoad() {
+  playerOneWins.innerText = `0 win`;
+  playerTwoWins.innerText = `0 win`;
+}
+
+function renderWinScore(wins, winner) { //TODO:
+  //can i just display wins? rather than this.current....?
   if (wins !== 1 && winner === 'player1') {
     playerOneWins.innerText = `${this.currentGame[winner].wins} wins`;
   } else if (winner === 'player1') {
     playerOneWins.innerText = `${this.currentGame[winner].wins} win`;
-  }
+  } 
 
   if (wins !== 1 && winner === 'player2') {
     playerTwoWins.innerText = `${this.currentGame[winner].wins} wins`;
   } else if (winner === 'player2') {
     playerTwoWins.innerText = `${this.currentGame[winner].wins} win`;
-  }
+  } 
 }
 
 function convertWinBoardToEmojis(board) {
@@ -102,16 +109,16 @@ function renderMiniWinCards(winner, miniCards) {
   if (winner === 'player1') {
     miniGameBoardsPlayer1.innerHTML = miniCards;
   } else if (winner === 'player2') {
-    miniGameBoardsPlayer2.innerHTML = miniCards;
+      miniGameBoardsPlayer2.innerHTML = miniCards;
   }
 }
 
 function callTimeOut(winner, nextPlayer) {
   setTimeout( function() {
-  if (winner) {
-    renderNextTurnMessage(nextPlayer);
-    clearEachTile();
-    enableAllTilePointerEvents();
+    if (winner) {
+      renderNextTurnMessage(nextPlayer);
+      clearEachTile();
+      enableAllTilePointerEvents();
     }
   }, 2000);
 }
@@ -138,4 +145,11 @@ function clearEachTile() {
   for (var i = 0; i < gameTile.length; i++) {
     gameTile[i].innerText = "";
     }
+}
+
+function setPlayerEmoji() {
+  currentGame.player1.token = '🥵';
+  currentGame.player2.token = '🥶';
+  renderplayerOneEmoji.innerText = currentGame.player1.token;
+  renderplayerTwoEmoji.innerText = currentGame.player2.token;
 }

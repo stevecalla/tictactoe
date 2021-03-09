@@ -15,8 +15,8 @@ class Game {
       renderNextTurnMessage(this.currentPlayer, targetKey);
       this.currentPlayer = 'player1';
     } else if (event.target.innerText === '') {
-      renderNextTurnMessage(this.currentPlayer, targetKey); //MOVE TO DIFFERENT FUNCTION TODO:
-      this.currentPlayer = 'player2';
+        renderNextTurnMessage(this.currentPlayer, targetKey); //MOVE TO DIFFERENT FUNCTION TODO:playerTwoWins
+        this.currentPlayer = 'player2';
     }
     this.updateGameTracker(targetKey, event);
   }
@@ -42,7 +42,7 @@ class Game {
     this.determineWinner(winningScore, winningCombos);
   }
 
-  determineWinner(winningScore, winningCombos) {
+  determineWinner(winningScore, winningCombos) { //TODO:
     for (var i = 0; i < winningCombos.length; i++) {
       if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
           this.currentBoard[winningCombos[i][2]] === winningScore) {
@@ -65,7 +65,7 @@ class Game {
     }
   }
 
-  checkForGameDraw(winner) {
+  checkForGameDraw(winner) { //TODO:
     if(!winner && (this.currentBoard.zero + this.currentBoard.one + this.currentBoard.two
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
@@ -85,7 +85,7 @@ class Game {
     }
   }
 
-  resetWinnerAndCurrentBoard() {
+  resetWinnerAndCurrentBoard() { //TODO:
     if (this.winner) {
       this.winner = undefined;
       this.currentBoard = {zero: 0, one: 0, two: 0, 
