@@ -157,6 +157,10 @@ main {
 /* ------------------MEDIA QUERIES MAX WIDTH 700px SMALL SCREENS-------------------- */
 @media only screen and (max-width: 900px) {
 
+  body {
+    margin: 0;
+  }
+
   /*--------------------------MOBILE - MAIN---------------------*/
   main {
     display: flex;
@@ -176,11 +180,12 @@ main {
 
   .mini-boards {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: flex-start;
     border: 0.1rem solid white;
     height: 20vh;
-    width: 66vw;
+    width: 50vw;
     margin: 2vw;
     overflow: auto;
   }
@@ -189,7 +194,7 @@ main {
     display: flex;
     justify-content: unset;
     height: 11vh;
-    width: 18vw;
+    width: 20vw;
     margin: 5px;
   }
 
@@ -216,7 +221,8 @@ main {
     justify-content: center;
     align-items: center;
     margin: 0;
-    font-size: 40px;
+    margin-top: 5vh;
+    font-size: 35px;
   }
 
   /*--------------------------MOBILE - GAME BOARD SECTION---------------------*/
@@ -230,7 +236,7 @@ main {
     height: 15rem;
     width: 21rem;
     margin-top: .0vh;
-    margin-bottom: .5vh;
+    margin-bottom: -4vh;
   }
   
   .game-tile {
@@ -262,10 +268,11 @@ main {
 
   .restart-game-button,
   .clear-wins-button {
-    height: 8vh;
-    width: 25vw;
+    height: 6vh;
+    width: 20vw;
     margin: 1vh;
-    font-size: 1rem;
+    margin-bottom: 3vh;
+    font-size: .75rem;
   }
 
 }
