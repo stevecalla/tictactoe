@@ -55,10 +55,8 @@ class Game {
   endGameActions(winner) {
     this.winCounter();
     this.checkForGameDraw();
-    
-    this.createWinHistory(this.currentBoard); //TODO:
-    convertWinBoardToRenderEmojis(this.currentBoard); //TODO:
-
+    this.createWinHistory(this.currentBoard);
+    this.convertWinBoardToRenderEmojis(this.currentBoard);
     disableAllTilePointerEvents(this.winner);
     this.resetWinnerAndCurrentBoard();
     this.restartGame(winner);
@@ -88,6 +86,19 @@ class Game {
       this[this.winner].historicalWins.unshift(winBoard);
       this[this.winner].saveWinsToLocalStorage();
     }
+  }
+
+  convertWinBoardToRenderEmojis(board) {
+    var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
+    var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+    for (var i = 0; i < boardKeys.length; i++) {
+      if (board[boardKeys[i]] === 5) {
+        emojiBoard[boardKeys[i]] = currentGame.player2.token;
+      } else if (board[boardKeys[i]] === 1) {
+        emojiBoard[boardKeys[i]] = currentGame.player1.token;
+      }
+    }
+    this.createEmojiHistory(emojiBoard);
   }
 
   createEmojiHistory(emojiBoard) {

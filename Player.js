@@ -11,8 +11,6 @@ class Player {
     localStorage.setItem(this.id, JSON.stringify(this.historicalWins));
   }
 
-
-
   getWinsFromLocalStorage(player, id) {
     var parsedWinHistory;
     var retrievedWinHistory = localStorage.getItem(id);
@@ -43,7 +41,6 @@ class Player {
   }
 
   getEmojisFromLocalStorage(player, id) {
-    console.log('get')
     var parsedPlayerOneEmojiHistory;
     var parsedPlayerTwoEmojiHistory;
     var retrievedPlayerOneEmojiHistory = localStorage.getItem('a');
@@ -51,22 +48,15 @@ class Player {
 
     parsedPlayerOneEmojiHistory = JSON.parse(retrievedPlayerOneEmojiHistory);
     parsedPlayerTwoEmojiHistory = JSON.parse(retrievedPlayerTwoEmojiHistory);
-
-
-    console.log(parsedPlayerOneEmojiHistory)
-    console.log(parsedPlayerTwoEmojiHistory)
     this.restoreHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory);
     this.renderHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory);
   }
 
   restoreHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory) {
-    console.log('restore')
-    console.log(player)
     if (parsedPlayerOneEmojiHistory !== null || parsedPlayerTwoEmojiHistory !== null) {
       currentGame.player1.historicalEmojis = parsedPlayerOneEmojiHistory;
       currentGame.player2.historicalEmojis = parsedPlayerTwoEmojiHistory;
     }
-    console.log(currentGame[player].historicalEmojis);
   }
 
   renderHistoricalEmojis(player, parsedEmojiHistory) {

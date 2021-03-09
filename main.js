@@ -26,7 +26,8 @@ function startGame() {
   setPlayerEmoji();
   renderWinTextOnLoad();
   renderNextTurnMessageOnLoad();
-  getFromLocalStorage();
+  getWinsFromLocalStorage();
+  getEmojisFromLocalStorage();
 }
 
 function setPlayerEmoji() {
@@ -45,11 +46,12 @@ function renderNextTurnMessageOnLoad() {
   nextTurnMessage.innerText = `It\'s ${currentGame.player1.token}\'s turn!`;
 }
 
-function getFromLocalStorage() {
+function getWinsFromLocalStorage() {
   currentGame.player1.getWinsFromLocalStorage('player1', '1');
   currentGame.player2.getWinsFromLocalStorage('player2', '5');
+}
 
-  // TODO:
+function getEmojisFromLocalStorage() {
   currentGame.player1.getEmojisFromLocalStorage('player1', 'a');
   currentGame.player2.getEmojisFromLocalStorage('player2', 'b');
 }
@@ -93,19 +95,6 @@ function renderWinScore(wins, winner) {
 
 function renderDrawMessage() {
   nextTurnMessage.innerText = `It's a draw!`;
-}
-
-function convertWinBoardToRenderEmojis(board) {
-  var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
-  var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-  for (var i = 0; i < boardKeys.length; i++) {
-    if (board[boardKeys[i]] === 5) {
-      emojiBoard[boardKeys[i]] = currentGame.player2.token;
-    } else if (board[boardKeys[i]] === 1) {
-      emojiBoard[boardKeys[i]] = currentGame.player1.token;
-    }
-  }
-  currentGame.createEmojiHistory(emojiBoard);
 }
 
 function createMiniWinBoards(winner) {
