@@ -25,6 +25,7 @@ function startGame() {
   currentGame = new Game('player2');
   setPlayerEmoji();
   renderWinTextOnLoad();
+  renderNextTurnMessageOnLoad();
   getFromLocalStorage();
 }
 
@@ -44,6 +45,10 @@ function renderTokenToBoard(player, targetKey, event) {
     event.target.innerText = currentGame[player].token;
     disableSingleTilePointerEvent(event) 
   }
+}
+
+function renderNextTurnMessageOnLoad() {
+  nextTurnMessage.innerText = `It\'s ${currentGame.player1.token}\'s turn!`;
 }
 
 function renderNextTurnMessage(player, targetKey) {
