@@ -67,7 +67,7 @@ class Game {
       this[this.winner].wins ++;
       renderWinScore(this[this.winner].wins, this.winner);
       renderWinMessage(this.winner);
-      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins);
+      console.log('winner', this.winner, 'w1', this.player1.wins, 'w2', this.player2.wins); //TODO:
     }
   }
 
@@ -76,7 +76,7 @@ class Game {
       + this.currentBoard.three + this.currentBoard.four + this.currentBoard.five
       + this.currentBoard.six + this.currentBoard.seven + this.currentBoard.eight > 24)) {
         this.winner = 'draw';
-        renderDrawMessage() 
+        renderDrawMessage();
       }
       this.restartGame(this.winner);
   }
