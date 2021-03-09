@@ -105,7 +105,7 @@ function convertWinBoardToRenderEmojis(board) {
       emojiBoard[boardKeys[i]] = currentGame.player1.token;
     }
   }
-  currentGame.emojiHistory(emojiBoard);
+  currentGame.createEmojiHistory(emojiBoard);
 }
 
 function createMiniWinBoards(winner) {
@@ -128,7 +128,6 @@ function createMiniWinBoards(winner) {
   }
   renderMiniWinCards(winner, createMiniBoardCards);
 }
-
 
 function renderMiniWinCards(winner, miniCards) {
   if (winner === 'player1') {

@@ -56,7 +56,7 @@ class Game {
     this.winCounter();
     this.checkForGameDraw();
     
-    this.winHistory(this.currentBoard); //TODO:
+    this.createWinHistory(this.currentBoard); //TODO:
     convertWinBoardToRenderEmojis(this.currentBoard); //TODO:
 
     disableAllTilePointerEvents(this.winner);
@@ -83,17 +83,17 @@ class Game {
       this.restartGame(this.winner);
   }
 
-  winHistory(winBoard) {
+  createWinHistory(winBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalWins.unshift(winBoard);
       this[this.winner].saveWinsToLocalStorage();
     }
   }
 
-  emojiHistory(emojiBoard) {
+  createEmojiHistory(emojiBoard) {
     if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalEmojis.unshift(emojiBoard);
-      this[this.winner].saveWinsToLocalStorage();
+      this[this.winner].saveEmojisToLocalStorage();
       createMiniWinBoards(this.winner);
     }
   }

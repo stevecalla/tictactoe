@@ -4,27 +4,21 @@ class Player {
     this.token = null;
     this.wins = 0;
     this.historicalWins = [];
-    // this.emojiId = playerId;
-    this.historicalEmojis = []; //TODO:
+    this.historicalEmojis = [];
   }
 
   saveWinsToLocalStorage() {
     localStorage.setItem(this.id, JSON.stringify(this.historicalWins));
-
-    //save emojis to local storage TODO:
-    if (this.id === 1) {
-      localStorage.setItem('a', JSON.stringify(this.historicalEmojis));
-    } else {
-      localStorage.setItem('b', JSON.stringify(this.historicalEmojis));
-    }
   }
+
+
 
   getWinsFromLocalStorage(player, id) {
     var parsedWinHistory;
     var retrievedWinHistory = localStorage.getItem(id);
     parsedWinHistory = JSON.parse(retrievedWinHistory);
     this.restoreHistoricalWins(player, parsedWinHistory);
-    // this.renderHistoricalWins(player, parsedWinHistory);
+    this.renderHistoricalWins(player, parsedWinHistory);
   }
 
   restoreHistoricalWins(player, parsedWinHistory) {
@@ -34,14 +28,19 @@ class Player {
     }
   }
 
-  // renderHistoricalWins(player, parsedWinHistory) {
-  //   if (parsedWinHistory !== null) {
-  //     renderWinScore(currentGame[player].wins, player); //renders the score //TODO:
-  //     createMiniWinBoards(player); //renders mini cards //TODO:
-  //   }
-  // }
+  renderHistoricalWins(player, parsedWinHistory) {
+    if (parsedWinHistory !== null) {
+      renderWinScore(currentGame[player].wins, player);
+    }
+  }
 
-  // TODO:
+  saveEmojisToLocalStorage() {
+    if (this.id === 1) {
+      localStorage.setItem('a', JSON.stringify(this.historicalEmojis));
+    } else {
+      localStorage.setItem('b', JSON.stringify(this.historicalEmojis));
+    }
+  }
 
   getEmojisFromLocalStorage(player, id) {
     console.log('get')
@@ -66,16 +65,13 @@ class Player {
     if (parsedPlayerOneEmojiHistory !== null || parsedPlayerTwoEmojiHistory !== null) {
       currentGame.player1.historicalEmojis = parsedPlayerOneEmojiHistory;
       currentGame.player2.historicalEmojis = parsedPlayerTwoEmojiHistory;
-      // currentGame[player].wins = parsedWinHistory.length;
     }
     console.log(currentGame[player].historicalEmojis);
-
   }
 
   renderHistoricalEmojis(player, parsedEmojiHistory) {
     if (parsedEmojiHistory !== null) {
-      renderWinScore(currentGame[player].wins, player); //renders the score //TODO:
-      createMiniWinBoards(player); //renders mini cards //TODO:
+      createMiniWinBoards(player);
     }
   }
 
