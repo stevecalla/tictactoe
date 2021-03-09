@@ -37,8 +37,8 @@ class Player {
   }
 
   // maybe button to reset game?
-  // deleteFromLocalStorage() {
-  //   localStorage.clear();
-  // }
+  deleteFromLocalStorage() {
+    localStorage.clear();
+  }
 
 }

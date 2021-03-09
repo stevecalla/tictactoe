@@ -6,8 +6,10 @@ var miniGameBoardsPlayer2 = document.querySelector('.mini-boards-player2');
 var nextTurnMessage = document.querySelector('#turnMessage');
 var renderplayerOneEmoji = document.querySelector('#player1Emoji');
 var renderplayerTwoEmoji = document.querySelector('#player2Emoji');
-var renderWinsPlayerOne = document.querySelector('#playerOneWins');
-var renderWinsPlayerTwo = document.querySelector('#playerTwoWins');
+// var renderWinsPlayerOne = document.querySelector('#playerOneWins'); //TODO:
+// var renderWinsPlayerTwo = document.querySelector('#playerTwoWins'); //TODO:
+var restartGameButton = document.querySelector('#restartGame');
+var clearWinsButton = document.querySelector('#clearWins');
 
 // global variables below
 var currentGame;
@@ -15,13 +17,15 @@ var currentGame;
 // event listeners below
 window.addEventListener('load', startGame);
 gameBoard.addEventListener('click', playGame);
+restartGameButton.addEventListener('click', restartGame);
+clearWinsButton.addEventListener('click', clearWins);
 
 //functions below
 function startGame() {
   currentGame = new Game('player2');
   setPlayerEmoji();
   renderWinTextOnLoad();
-  currentGame.player1.getWinsFromLocalStorage();
+  currentGame.player1.getWinsFromLocalStorage(); //TODO:
 }
 
 function playGame(event) {
@@ -110,6 +114,17 @@ function renderMiniWinCards(winner, miniCards) {
   } else if (winner === 'player2') {
       miniGameBoardsPlayer2.innerHTML = miniCards;
   }
+}
+
+function restartGame() {
+  document.location.reload();
+  startGame();
+}
+
+function clearWins() {
+  localStorage.clear();
+  document.location.reload();
+  startGame();
 }
 
 function callTimeOut(winner, nextPlayer) {
