@@ -99,21 +99,23 @@ function renderDrawMessage() {
 
 function createMiniWinBoards(winner) {
   var createMiniBoardCards = '';
-  for (var i = 0; i < currentGame[winner].historicalEmojis.length; i++) {
-    createMiniBoardCards += 
-      `          
-        <div class="mini-game-board" id="miniGameBoard">
-          <article class='mini-game-tile' id='zero'>${currentGame[winner].historicalEmojis[i].zero}</article>
-          <article class='mini-game-tile' id='three'>${currentGame[winner].historicalEmojis[i].three}</article>
-          <article class='mini-game-tile' id='six'>${currentGame[winner].historicalEmojis[i].six}</article>
-          <article class='mini-game-tile' id='one'>${currentGame[winner].historicalEmojis[i].one}</article>
-          <article class='mini-game-tile' id='four'>${currentGame[winner].historicalEmojis[i].four}</article>
-          <article class='mini-game-tile' id='seven'>${currentGame[winner].historicalEmojis[i].seven}</article>
-          <article class='mini-game-tile' id='two'>${currentGame[winner].historicalEmojis[i].two}</article>
-          <article class='mini-game-tile' id='five'>${currentGame[winner].historicalEmojis[i].five}</article>
-          <article class='mini-game-tile' id='eight'>${currentGame[winner].historicalEmojis[i].eight}</article>
-        </div>
-        `;
+  if (currentGame[winner].historicalEmojis !== null) {
+    for (var i = 0; i < currentGame[winner].historicalEmojis.length; i++) {
+      createMiniBoardCards += 
+        `          
+          <div class="mini-game-board" id="miniGameBoard">
+            <article class='mini-game-tile' id='zero'>${currentGame[winner].historicalEmojis[i].zero}</article>
+            <article class='mini-game-tile' id='three'>${currentGame[winner].historicalEmojis[i].three}</article>
+            <article class='mini-game-tile' id='six'>${currentGame[winner].historicalEmojis[i].six}</article>
+            <article class='mini-game-tile' id='one'>${currentGame[winner].historicalEmojis[i].one}</article>
+            <article class='mini-game-tile' id='four'>${currentGame[winner].historicalEmojis[i].four}</article>
+            <article class='mini-game-tile' id='seven'>${currentGame[winner].historicalEmojis[i].seven}</article>
+            <article class='mini-game-tile' id='two'>${currentGame[winner].historicalEmojis[i].two}</article>
+            <article class='mini-game-tile' id='five'>${currentGame[winner].historicalEmojis[i].five}</article>
+            <article class='mini-game-tile' id='eight'>${currentGame[winner].historicalEmojis[i].eight}</article>
+          </div>
+          `;
+    }
   }
   renderMiniWinCards(winner, createMiniBoardCards);
 }
@@ -127,8 +129,21 @@ function renderMiniWinCards(winner, miniCards) {
 }
 
 function restartGame() {
-  document.location.reload();
-  startGame();
+  // document.location.reload();
+  // startGame();
+  // startNewGameOnDelay() //TODO:
+  console.log('yes')
+  // renderNextTurnMessage(currentGame.currentPlayer);
+  clearEachTile();
+  enableAllTilePointerEvents();
+  // startGame();
+  console.log('before', currentGame.currentBoard);
+  currentGame.currentBoard = {zero: 0, one: 0, two: 0, 
+    three: 0, four: 0, five: 0, 
+    six: 0, seven: 0, eight: 0};
+  currentGame.currentPlayer = 'player2'
+  console.log('after', currentGame.currentBoard);
+  renderNextTurnMessage('player1')
 }
 
 function clearWins() {

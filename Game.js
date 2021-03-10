@@ -81,6 +81,7 @@ class Game {
   }
 
   createWinHistory(winBoard) {
+    // console.log('84 win board', this.winner); //TODO:
     if (this.winner === 'player1' || this.winner === 'player2') {
       this[this.winner].historicalWins.unshift(winBoard);
       this[this.winner].saveWinsToLocalStorage();
@@ -88,6 +89,7 @@ class Game {
   }
 
   convertWinBoardToRenderEmojis(board) {
+    // console.log('92 board', board) //TODO:
     var emojiBoard = {zero: "", one: "", two: "", three: "", four: "", five: "", six: "", seven: "", eight: ""};
     var boardKeys = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
     for (var i = 0; i < boardKeys.length; i++) {
@@ -97,11 +99,17 @@ class Game {
         emojiBoard[boardKeys[i]] = currentGame.player1.token;
       }
     }
+    // console.log('102 emojiboard', emojiBoard)//TODO:
     this.createEmojiHistory(emojiBoard);
   }
 
   createEmojiHistory(emojiBoard) {
+    // console.log('105 emoji', this.winner); //TODO:
+    // console.log('108 emojiboard', emojiBoard); //TODO:
+    // console.log('109 emojiboard', this[this.winner]); //TODO:
+    // console.log('110 null', this[this.winner].historicalEmojis); //TODO:
     if (this.winner === 'player1' || this.winner === 'player2') {
+        // && this[this.winner].historicalEmojis !== null) { //TODO:
       this[this.winner].historicalEmojis.unshift(emojiBoard);
       this[this.winner].saveEmojisToLocalStorage();
       createMiniWinBoards(this.winner);

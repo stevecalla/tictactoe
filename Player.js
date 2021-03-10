@@ -40,7 +40,7 @@ class Player {
     }
   }
 
-  getEmojisFromLocalStorage(player, id) {
+  getEmojisFromLocalStorage(player) {
     var parsedPlayerOneEmojiHistory;
     var parsedPlayerTwoEmojiHistory;
     var retrievedPlayerOneEmojiHistory = localStorage.getItem('a');
@@ -59,8 +59,8 @@ class Player {
     }
   }
 
-  renderHistoricalEmojis(player, parsedEmojiHistory) {
-    if (parsedEmojiHistory !== null) {
+  renderHistoricalEmojis(player, parsedPlayerOneEmojiHistory, parsedPlayerTwoEmojiHistory) {
+    if (parsedPlayerOneEmojiHistory !== null || parsedPlayerTwoEmojiHistory !== null) {
       createMiniWinBoards(player);
     }
   }
