@@ -129,21 +129,21 @@ function renderMiniWinCards(winner, miniCards) {
 }
 
 function restartGame() {
-  // document.location.reload();
-  // startGame();
-  // startNewGameOnDelay() //TODO:
-  console.log('yes')
-  // renderNextTurnMessage(currentGame.currentPlayer);
   clearEachTile();
   enableAllTilePointerEvents();
-  // startGame();
-  console.log('before', currentGame.currentBoard);
   currentGame.currentBoard = {zero: 0, one: 0, two: 0, 
     three: 0, four: 0, five: 0, 
     six: 0, seven: 0, eight: 0};
-  currentGame.currentPlayer = 'player2'
-  console.log('after', currentGame.currentBoard);
-  renderNextTurnMessage('player1')
+  currentGame.currentPlayer = 'player2';
+  renderNextTurnMessage('player1');
+}
+
+function disableRestartButton() {
+  restartGameButton.disabled = true;
+}
+
+function enableRestartButton() {
+  restartGameButton.disabled = false;
 }
 
 function clearWins() {
@@ -158,6 +158,7 @@ function startNewGameOnDelay(winner, nextPlayer) {
       renderNextTurnMessage(nextPlayer);
       clearEachTile();
       enableAllTilePointerEvents();
+      enableRestartButton();
     }
   }, 3000);
 }
