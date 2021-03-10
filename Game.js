@@ -47,6 +47,7 @@ class Game {
       if (this.currentBoard[winningCombos[i][0]] + this.currentBoard[winningCombos[i][1]] + 
           this.currentBoard[winningCombos[i][2]] === winningScore) {
         this.winner = this.currentPlayer;
+        disableRestartButton();
       }
     }
     this.endGameActions(this.winner);
